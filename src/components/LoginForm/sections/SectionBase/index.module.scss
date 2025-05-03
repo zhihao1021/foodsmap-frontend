@@ -1,0 +1,118 @@
+.section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    &[data-trans=true] {
+        transition: left 0.3s;
+    }
+
+    &[data-show="LEFT"] {
+        left: -100%;
+    }
+
+    &[data-show="RIGHT"] {
+        left: 100%;
+    }
+
+    .inputBlock {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 2rem;
+
+        &[data-small-gap=true] {
+            gap: 0.25rem;
+        }
+
+        .error {
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: $box-background;
+            background-color: $input-error;
+            border-radius: 0.25rem;
+            text-align: left;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+
+            div {
+                height: 1.5rem;
+                line-height: 1.5rem;
+            }
+        }
+    }
+
+    &:has(>.nextButton) .inputBlock {
+        height: calc(100% - 3.5rem);
+    }
+
+    &:has(>.nextButton):has(>.lastButton) .inputBlock {
+        height: calc(100% - 4.75rem);
+    }
+
+    .nextButton {
+        position: relative;
+        width: 100%;
+        height: 3rem;
+        margin: 0.25rem 0;
+        border-radius: 1.5rem;
+        box-sizing: border-box;
+        text-align: center;
+        color: $box-background;
+        background-color: $disabled;
+        isolation: isolate;
+        overflow: hidden;
+
+        &:not(:disabled) {
+            &::before {
+                width: 100%;
+            }
+
+            &:hover {
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+
+        @include before-after {
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            z-index: -1;
+            transition: width 0.5s;
+        }
+
+        &::before {
+            background-color: $accept;
+        }
+
+        &::after {
+            backdrop-filter: brightness(1.05);
+        }
+    }
+
+    .lastButton {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        height: 1.25rem;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+        color: $disabled;
+        transition: color 0.3s;
+
+        &:hover {
+            color: inherit;
+        }
+    }
+}

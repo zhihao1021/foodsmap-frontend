@@ -1,0 +1,53 @@
+.inputField {
+    display: flex;
+    align-items: center;
+    gap: 0.1em 0.5em;
+    pointer-events: none;
+    margin-top: 0.5rem;
+
+    >*:not(.footer) {
+        color: $disabled;
+    }
+
+    &[data-error=true]>*:not(.footer) {
+        color: rgba($input-error, 0.5);
+    }
+
+    &:has(input:focus)>*:not(.footer) {
+        color: inherit;
+    }
+
+    &[data-error=true]:has(input:focus)>*:not(.footer) {
+        color: $input-error;
+    }
+
+    span {
+        transition: color 0.3s;
+    }
+
+    .inputBox {
+        flex: 1;
+        font-size: 0.8em;
+        pointer-events: initial;
+        transition: color 0.3s;
+    }
+
+    &:has(.footer) {
+        flex-wrap: wrap;
+
+        .footer {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            pointer-events: none;
+            font-size: 0.9rem;
+            color: $disabled;
+
+            >* {
+                pointer-events: initial;
+            }
+        }
+    }
+
+}

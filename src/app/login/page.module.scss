@@ -1,0 +1,32 @@
+.page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .box {
+        @include box-shadow(0.15rem);
+
+        background-color: $box-background;
+        padding: 2rem 3rem;
+        border-radius: 1rem;
+        box-sizing: border-box;
+        width: min(26rem, 95vw);
+        text-align: center;
+
+        h1 {
+            margin: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .or {
+            margin: 1rem 0;
+        }
+
+        input::selection {
+            color: $box-background;
+            background-color: $context;
+        }
+    }
+}

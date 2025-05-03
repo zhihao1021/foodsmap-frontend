@@ -1,0 +1,27 @@
+.option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0.1rem solid;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    color: rgba($context, 0.5);
+    border-radius: 0.5rem;
+    border-color: rgba($context, 0.5);
+    transition-property: $colors, transform;
+    transition-duration: 0.3s;
+
+    &:hover {
+        color: $context;
+        border-color: $context;
+        transform: translateY(-0.2rem);
+    }
+
+    .description {
+        flex: 1;
+        text-align: left;
+        font-size: 0.8em;
+    }
+}

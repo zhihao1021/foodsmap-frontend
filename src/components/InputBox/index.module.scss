@@ -1,0 +1,91 @@
+.inputBox {
+    position: relative;
+
+    input {
+        display: block;
+        width: calc(100% - 0.2rem);
+        height: calc(100% - 0.3rem);
+        padding: 0.3rem 0.1rem;
+        color: inherit;
+        font-size: 0.9em;
+
+        &::placeholder {
+            color: transparent;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        &:focus::placeholder {
+            color: $disabled;
+        }
+
+        &[data-error=true]:focus::placeholder {
+            color: rgba($input-error, 0.5);
+        }
+
+        &[type="password"] {
+            letter-spacing: 0.125em;
+
+            &::placeholder {
+                letter-spacing: initial;
+            }
+        }
+        
+        &[type="number"] {
+            letter-spacing: 0.05em;
+        }
+    }
+
+    .title {
+        position: absolute;
+        top: 0.15rem;
+        left: 0.1rem;
+        font-size: 0.8em;
+        height: 1.45em;
+        line-height: 1.45em;
+        user-select: none;
+        pointer-events: none;
+        transition:
+            top 0.3s,
+            font-size 0.3s;
+    }
+
+    &:has(input:focus) .title,
+    .title[data-no-context=false] {
+        top: -1.1em;
+        font-size: 0.45em;
+    }
+
+    @include before-after {
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: 100%;
+    }
+
+    &::before {
+        background-color: rgba($disabled, 0.5);
+    }
+
+    &:has(input[data-error=true])::before {
+        background-color: rgba($input-error, 0.5);
+    }
+
+    &::after {
+        width: 0;
+        left: 30%;
+        background-color: $context;
+        transition: left 0.3s, width 0.3s;
+    }
+
+    &:has(input[data-error=true])::after {
+        background-color: $input-error;
+    }
+
+    &:has(input:focus) {
+        &::after {
+            left: 0;
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.otherMethod {
+    font-size: 0.9rem;
+    color: $disabled;
+    transition: color 0.3s;
+
+    &:hover {
+        color: $context;
+    }
+}
