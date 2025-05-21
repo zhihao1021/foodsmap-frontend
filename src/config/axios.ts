@@ -13,12 +13,12 @@ clientRequest.interceptors.request.use(config => {
 })
 
 serverRequest.interceptors.request.use(async config => {
-    const { headers } = await import('next/headers');
-
     config.baseURL = process.env.INTERNAL_API_ENDPOINT;
-    const headersList = await headers();
-    const token = headersList.get("Authorization");
-    if (token !== null) config.headers.Authorization = token;
+
+    const { tokenContainer } = await import("@/lib/tokenContainer");
+    const token = await tokenContainer.getToken();
+
+    if (token !== null) config.headers.Authorization = `Bearer ${token}`;
 
     return config;
 })

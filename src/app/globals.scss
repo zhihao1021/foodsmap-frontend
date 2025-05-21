@@ -2,6 +2,9 @@
 
 :root {
   font-size: min(1rem, 4vw);
+  color-scheme: light dark;
+
+  @include color-map;
 }
 
 html,
@@ -19,6 +22,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-noto-sans-tc);
+  padding: 0 calc(max(2.5vw, 50vw - $max-contexnt-width / 2));
 }
 
 a {
@@ -26,10 +30,15 @@ a {
   text-decoration: none;
 }
 
+label>input[type="checkbox"] {
+  display: none;
+}
+
 input,
 button {
   color: inherit;
   font-size: inherit;
+  font-family: inherit;
   background-color: transparent;
   outline: none;
   border: none;
@@ -52,6 +61,16 @@ button {
   &:disabled {
     cursor: not-allowed;
   }
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin: 0.8rem 0;
 }
 
 @media (prefers-color-scheme: dark) {

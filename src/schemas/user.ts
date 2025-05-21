@@ -14,3 +14,15 @@ export interface UserCreate {
     emailValidCode: string,
     identifyCode: string
 }
+
+export interface UserUpdate {
+    email?: string,
+    displayName?: string,
+    password?: string,
+    newPassword?: string,
+    oldEmailValidCode?: string,
+    oldIdentifyCode?: string,
+    emailValidCode?: string,
+    identifyCode?: string,
+}
+

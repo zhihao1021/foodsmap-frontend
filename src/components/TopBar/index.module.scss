@@ -1,0 +1,13 @@
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4rem;
+    width: 100vw;
+    box-sizing: border-box;
+    z-index: 100;
+    background-color: $background;
+    border-bottom: 1px solid $disabled;
+    display: flex;
+    padding: 0.5rem calc(max(2.5vw, 50vw - $max-contexnt-width / 2));
+}

@@ -30,6 +30,16 @@
         font-size: 0.8em;
         pointer-events: initial;
         transition: color 0.3s;
+
+        input {
+            &::placeholder {
+                color: transparent;
+            }
+
+            &:focus::placeholder {
+                color: $disabled;
+            }
+        }
     }
 
     &:has(.footer) {

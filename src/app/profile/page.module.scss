@@ -1,0 +1,21 @@
+.profile {
+    width: min(100%, 56rem);
+    margin: auto;
+    font-size: 1.25rem;
+    padding-top: 4rem;
+
+    .field {
+        display: flex;
+
+        span:first-child {
+            width: 6.5em;
+        }
+
+        span:last-child {
+            max-width: calc(100% - 6.5em);
+            text-wrap: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

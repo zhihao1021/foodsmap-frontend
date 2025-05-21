@@ -1,26 +1,32 @@
 "use server";
-import { AxiosError } from "axios";
-import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 import getCurrentUserData from "@/api/user/getCurrentUserData";
 
-export default async function ProfilePage(): Promise<ReactNode> {
-    try {
-        const data = await getCurrentUserData();
+import useTokenCache from "@/lib/useTokenCache";
 
-        return <div>
-            {data.displayName}
-        </div>
-    }
-    catch (error) {
-        if (error instanceof AxiosError) {
-            const status = error.response?.status;
-            switch (status) {
-                case 401:
-                    return redirect("/login");
-            }
-        }
-        return null;
-    }
-}
+import BasicData from "./BasicData";
+import ChangeEmail from "./ChangeEmail";
+
+import styles from "./page.module.scss";
+
+const getUserData = useTokenCache(getCurrentUserData, [], { tags: ["userData"] });
+
+export default async function ProfilePage(): Promise<ReactNode> {
+    const {
+        username,
+        displayName,
+        email,
+    } = await getUserData();
+
+    return <div className={styles.profile}>
+        <h1>帳號設定</h1>
+        <BasicData
+            username={username}
+            displayName={displayName}
+        />
+        <ChangeEmail
+            email={email}
+        />
+    </div>;
+};

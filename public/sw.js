@@ -45,19 +45,31 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
     const request = event.request;
+    // const nextUrl = request.headers.get("Next-Url");
+    // const url = request.url;
 
     console.debug("Fetch:", request);
-    if (request.url.startsWith(location.origin) && request.headers.get("Authorization") === null) {
-        return event.respondWith(getDBValue("access_token").then(token => {
-            const headers = new Headers(request.headers);
-            if (token) headers.set("Authorization", `Bearer ${token}`);
+    return event;
+    // if (!url.startsWith(location.origin)) {
+    //     return event;
+    // }
+    // else if (request.destination === "script" && url.includes("/_next/")) {
+    //     return event;
+    // }
+    // else if (request.destination === "" && request.cache === "reload") {
+    //     // pass
+    // }
+    // else if (request.destination !== "document" && nextUrl === null) {
+    //     return event;
+    // }
 
-            return fetch(new Request(
-                request,
-                { headers: headers }
-            ));
-        }).catch(() => fetch(request)));
-    }
+    // return event.respondWith(getDBValue("access_token").then(token => {
+    //     const headers = new Headers(request.headers);
+    //     if (token) headers.set("Authorization", `Bearer ${token}`);
 
-    return event
+    //     return fetch(new Request(
+    //         request,
+    //         { headers: headers }
+    //     ));
+    // }).catch(() => fetch(request)));
 });

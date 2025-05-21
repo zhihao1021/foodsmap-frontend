@@ -1,0 +1,165 @@
+.mask {
+    position: relative;
+    height: 1.8em;
+    width: 100%;
+    max-width: calc(7.25em + 18rem);
+    margin: 0.75rem 0;
+    transition: height 0.3s, width 0.3s;
+    overflow: hidden;
+
+    &[data-show-state="0"],
+    &[data-show-state="6"] {
+        height: 1.8em;
+        width: 6.75em;
+    }
+
+    &[data-show-state="1"],
+    &[data-show-state="4"] {
+        width: min(100%, 300px * var(--ratio, 1));
+        height: calc(65px * var(--ratio, 1) + 2px);
+    }
+
+    &[data-show-state="2"],
+    &[data-show-state="5"] {
+        height: 2.6em;
+        width: 12em;
+    }
+
+    &[data-show-state="3"] {
+        height: 1.8em;
+        width: 22em;
+    }
+
+    >div,
+    .loadingStrip {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .loadingStrip {
+        height: 100%;
+        width: 100%;
+    }
+
+    >div:not(.loadingStrip) {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+
+        &[data-show=true] {
+            opacity: 1;
+            pointer-events: initial;
+        }
+    }
+
+    .changeEmail {
+        color: $primary;
+        border: 0.1rem solid $primary;
+        height: 2em;
+        width: 7.5em;
+        text-align: center;
+        font-size: 0.9em;
+        border-radius: 0.5rem;
+        transition: color 0.3s, background-color 0.3s;
+
+        &:hover {
+            color: $background;
+            background-color: $primary;
+        }
+    }
+
+    .cf {
+        transform: scale(var(--ratio, 1));
+        transform-origin: top left;
+    }
+
+    .validateBox,
+    .emailBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $context;
+        flex-wrap: wrap;
+    }
+
+    .validateBox {
+        height: 2.6em;
+        width: 12em;
+
+        .inputBox {
+            width: 5em;
+            text-align: center;
+
+            input {
+                padding-top: 0.1em;
+                padding-bottom: 0.1em;
+            }
+
+            input,
+            input::placeholder {
+                letter-spacing: 0.5em;
+                text-align: center;
+                font-size: inherit;
+            }
+
+            input::placeholder {
+                padding-inline-start: 0.5em;
+            }
+        }
+
+        .identifyCodeBox {
+            width: 100%;
+            text-align: right;
+            font-size: 0.6em;
+            color: $disabled;
+        }
+    }
+
+    .emailBox {
+        height: 1.8em;
+        width: 22em;
+
+        .inputBox {
+            width: calc(100% - 6em - 1rem);
+
+            input {
+                font-size: 1em;
+                padding-top: 0.1em;
+                padding-bottom: 0.1em;
+            }
+        }
+    }
+
+    .success {
+        height: 1.8em;
+        display: flex;
+        align-items: center;
+        color: $accept;
+        gap: 0.5em;
+    }
+}
+
+.errorMessage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s;
+
+    &[data-open=true] {
+        height: 1.8em;
+    }
+
+    div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 0.65rem;
+        height: 1.8em;
+        line-height: 1.8em;
+        border-radius: 0.25rem;
+        width: fit-content;
+        background-color: $input-error;
+    }
+}

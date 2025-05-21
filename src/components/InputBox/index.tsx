@@ -7,7 +7,7 @@ type propsType = Readonly<{
     title?: string,
     disabled?: boolean,
     next?: () => void,
-    focusOnEnable?: boolean,
+    focusOnEnabled?: boolean,
 }>;
 
 export default function InputBox(props: propsType & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>): ReactNode {
@@ -19,7 +19,7 @@ export default function InputBox(props: propsType & DetailedHTMLProps<InputHTMLA
         next,
         onKeyDown,
         onChange,
-        focusOnEnable,
+        focusOnEnabled,
         ref,
         ...rest
     } = props;
@@ -27,14 +27,14 @@ export default function InputBox(props: propsType & DetailedHTMLProps<InputHTMLA
     const customRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (!focusOnEnable || disabled || disabled === undefined) return;
+        if (!focusOnEnabled || disabled || disabled === undefined) return;
 
         const element = ((ref || customRef) as RefObject<HTMLInputElement>).current;
         if (!element) return;
 
         // setTimeout(() => element.focus(), 200);
         element.focus({ preventScroll: true });
-    }, [focusOnEnable, disabled, ref]);
+    }, [focusOnEnabled, disabled, ref]);
 
     return <div className={`${styles.inputBox} ${className}`}>
         {title && <span className={styles.title} data-no-context={!props.value}>{title}</span>}

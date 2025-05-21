@@ -10,13 +10,9 @@
         font-size: 0.9em;
 
         &::placeholder {
-            color: transparent;
+            color: $disabled;
             font-size: 0.9em;
             transition: color 0.3s;
-        }
-
-        &:focus::placeholder {
-            color: $disabled;
         }
 
         &[data-error=true]:focus::placeholder {
@@ -24,13 +20,11 @@
         }
 
         &[type="password"] {
-            letter-spacing: 0.125em;
-
             &::placeholder {
                 letter-spacing: initial;
             }
         }
-        
+
         &[type="number"] {
             letter-spacing: 0.05em;
         }
@@ -65,6 +59,7 @@
 
     &::before {
         background-color: rgba($disabled, 0.5);
+        transition: background-color 0.3s;
     }
 
     &:has(input[data-error=true])::before {
@@ -74,8 +69,8 @@
     &::after {
         width: 0;
         left: 30%;
-        background-color: $context;
-        transition: left 0.3s, width 0.3s;
+        background-color: var(--input-bottom-bar, $context);
+        transition: left 0.3s, width 0.3s, background-color 0.3s;
     }
 
     &:has(input[data-error=true])::after {

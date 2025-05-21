@@ -13,7 +13,7 @@ type propsType = Readonly<{
     inputBoxClassName?: string,
     footer?: ReactNode,
     setValue?: (value: any) => void,
-    focusOnEnable?: boolean,
+    focusOnEnabled?: boolean,
 }>
 
 export default function InputField(props: propsType & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>): ReactNode {
