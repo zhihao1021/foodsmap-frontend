@@ -9,6 +9,7 @@ import LoadingStrip from "@/components/LoadingStrip";
 import updateUserDataAction from "@/actions/updateUserDataAction";
 
 import shareStyles from "../share.module.scss";
+import styles from "./index.module.scss";
 
 type propsType = Readonly<{
     username: string,
@@ -64,7 +65,8 @@ export default function BasicData(props: propsType): ReactNode {
                 next={() => setEditDisplayName(false)}
                 disabled={!editDisplayName}
                 focusOnEnabled
-            /> : <span className={shareStyles.inputBox}>{newDisplayName}</span>}
+            /> : <span className={`${shareStyles.inputBox} ${styles.changeName}`}>{newDisplayName}</span>}
+
             <label className="ms-p">
                 <input
                     type="checkbox"
