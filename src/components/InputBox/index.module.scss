@@ -9,10 +9,15 @@
         color: inherit;
         font-size: 0.9em;
 
+
         &::placeholder {
             color: $disabled;
             font-size: 0.9em;
-            transition: color 0.3s;
+            transition: color 0.3s, opacity 0.3s;
+        }
+
+        &:not(:focus)::placeholder {
+            opacity: 0;
         }
 
         &[data-error=true]:focus::placeholder {
