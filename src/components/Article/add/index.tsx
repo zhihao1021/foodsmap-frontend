@@ -48,15 +48,7 @@ export default function AddArticle() {
     return (
         <div className={styles.container}>
             <h2>新增文章</h2>
-
             {/* <label className={styles.label}>標題</label> */}
-            {/* <input
-                className={styles.input}
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="輸入文章標題"
-            /> */}
             <InputBox
                 className={styles.inputBox}
                 value={title}
@@ -72,7 +64,8 @@ export default function AddArticle() {
                 placeholder="輸入文章內容"
             />
 
-            <div className={styles.label}>新增hashtag</div>
+            {/* <div className={styles.label}>新增hashtag</div> */}
+
             {/* <div className={styles.label}>上傳圖片或影片</div> */}
             <div className={styles.imageList}>
                 {
@@ -100,35 +93,6 @@ export default function AddArticle() {
                     <span className="ms">photo_library</span>
                 </label>
             </div>
-            {/* <label className={styles.fileInputLabel}>
-                <input
-                    className={styles.fileInput}
-                    type="file"
-                    accept="image/*,video/*"
-                    multiple
-                    onChange={handleFileChange}
-                />
-                <span className="ms">photo_library</span>
-            </label>
-
-            <div className={styles.mediaList}>
-                {mediaPreview && mediaPreview.length > 0 && (
-                    mediaList && mediaPreview.map((url, index) => (
-                        <div key={index} className={styles.mediaPreview}>
-                            <button
-                                className={`ms ${styles.removeButton}`}
-                                onClick={() => handleRemoveMedia(index)}
-
-                            >close</button>
-                            {
-                                mediaList[index].type.startsWith("image/") ? <img src={url} /> : <video src={url} />
-                            }
-                        </div>
-                    ))
-                )}
-            </div> */}
-
-
 
             <div className={styles.buttonBox}>
                 <button className={styles.button} onClick={handleSubmit}>
