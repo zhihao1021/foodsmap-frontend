@@ -15,11 +15,15 @@
         background-color: #F2F2F2;
     }
 
-    img {
+    .iconContainer {
+        position: relative;
         height: 3rem;
         width: 3rem;
-        object-fit: cover;
-        object-position: center;
+
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
     }
 
     span {

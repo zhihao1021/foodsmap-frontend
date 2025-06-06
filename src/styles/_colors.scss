@@ -6,6 +6,8 @@
 
         --color-context: #f4ece7;
         --color-background: #070403;
+
+        --color-hover-background: #333333AA;
     }
 }
 
@@ -14,6 +16,8 @@ $background: var(--color-background, #fcf9f8);
 $primary: var(--color-primary, #d66829);
 $secondary: var(--color-secondary, #f5af8a);
 $accent: var(--color-accent, #fe7e39);
+
+$hover-background: var(--color-hover-background, #88888866);
 
 // $box-context: #000000;
 // $box-background: #FFFFFF;

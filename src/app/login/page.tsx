@@ -1,3 +1,4 @@
+"use server";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";

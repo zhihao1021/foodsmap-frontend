@@ -4,5 +4,5 @@ export default async function updateCurrentUserAvatar(data: File): Promise<void>
     const formData = new FormData();
     formData.append("file", data);
 
-    await request.put("/user/avatar", formData);
+    await request.put("/avatar", formData);
 }

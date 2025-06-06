@@ -53,7 +53,7 @@
         }
     }
 
-    img,
+    .imageBox,
     a {
         display: block;
         height: 1.25em;
@@ -65,6 +65,14 @@
         &[data-selected=true],
         &:hover {
             color: $context;
+        }
+    }
+
+    .imageBox {
+        position: relative;
+
+        img {
+            object-fit: contain;
         }
     }
 }

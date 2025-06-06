@@ -47,8 +47,6 @@ export default function ChangeEmail(props: propsType): ReactNode {
 
     const [state, setState] = useState<State>(State.INITIAL);
     const [showState, setShowState] = useState<State>(State.INITIAL);
-    // const [state, setState] = useState<State>(State.SUCCESS);
-    // const [showState, setShowState] = useState<State>(State.SUCCESS);
     const [windowWidth, setWindowWidth] = useState<number>(-1);
     const [onResize, setOnResize] = useState<(() => void) | undefined>(undefined);
 
@@ -209,10 +207,6 @@ export default function ChangeEmail(props: propsType): ReactNode {
     }, [cfCode, state, email, newEmail]);
 
     useEffect(() => {
-        setShowErrorMessage(errorMessage !== "");
-    }, [errorMessage]);
-
-    useEffect(() => {
         setWindowWidth(window.innerWidth);
         const onResize = () => {
             setWindowWidth(window.innerWidth);
@@ -227,6 +221,7 @@ export default function ChangeEmail(props: propsType): ReactNode {
     }, [onResize])
 
     useEffect(() => {
+        setShowErrorMessage(errorMessage !== "");
         if (errorMessage) setRealErrorMessage(errorMessage);
     }, [errorMessage]);
 

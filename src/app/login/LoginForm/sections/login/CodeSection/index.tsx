@@ -81,7 +81,7 @@ export default function CodeSection(props: propsType): ReactNode {
             }
             setSection(SectionState.LOGIN_CODE);
         })
-    }, [account, code, currentMethod, loginCallback]);
+    }, [account, code, currentMethod, loginCallback, setSection]);
 
     return <SectionBase
         errorMessage={errorMessage}

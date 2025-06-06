@@ -1,0 +1,20 @@
+.searchBar {
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+
+    .icon {
+        color: $disabled;
+        transition: color 0.3s;
+    }
+
+    .inputBox {
+        flex: 1;
+    }
+
+    &:has(input:focus) .icon {
+        color: $context;
+    }
+}

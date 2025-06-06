@@ -8,6 +8,7 @@ import checkIsMobile from "@/utils/detectmobilebrowser";
 import logo from "@/assets/logo.png";
 
 import styles from "./index.module.scss";
+import Image from "next/image";
 
 const navigateList = [
     {
@@ -59,7 +60,9 @@ export default function NavigateBar(): ReactNode {
     }, []);
 
     return <div className={styles.navigateBar} data-mobile={isMobile}>
-        {!isMobile && <img src={logo.src} />}
+        {!isMobile && <div className={styles.imageBox}>
+            <Image alt="logo" src={logo.src} fill />
+        </div>}
         {navigateList.map((item) => (
             <Link
                 key={item.name}

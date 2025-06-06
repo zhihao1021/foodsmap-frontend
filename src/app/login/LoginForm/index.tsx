@@ -100,7 +100,7 @@ export default function LoginForm(): ReactNode {
         setTimeout(() => {
             router.push("/");
         }, 2600)
-    }, [setSection]);
+    }, [setSection, router]);
 
     const registerFunc = useCallback(() => {
         if (!account || !username || !displayName || !password || !emailValidateCode || !identifyCode) return;
