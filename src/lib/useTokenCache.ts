@@ -9,7 +9,7 @@ const funcMap: {
     [key: string]: AsyncCallback<ArgsType>
 } = {};
 
-export default function useTokenCache<T extends ArgsType, V extends AsyncCallback<T>>(
+export default function tokenCache<T extends ArgsType, V extends AsyncCallback<T>>(
     func: V,
     keyParts?: string[],
     options?: {

@@ -1,6 +1,6 @@
 "use client"
 import { AxiosError } from "axios";
-import { Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useCallback, useState } from "react";
 
 import preCheckEmail from "@/api/auth/preCheckEmail";
 

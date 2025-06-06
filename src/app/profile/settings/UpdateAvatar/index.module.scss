@@ -1,0 +1,128 @@
+.avatarBox {
+    display: block;
+    position: relative;
+    width: min(12rem, 100%);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    isolation: isolate;
+    user-select: none;
+
+    img {
+        object-fit: cover;
+    }
+
+    @include before-after {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    &::before {
+        background-color: $hover-background;
+        z-index: 1;
+    }
+
+    &::after {
+        content: "變更";
+        height: 2em;
+        line-height: 2em;
+        top: calc(50% - 1em);
+        text-align: center;
+        z-index: 2;
+    }
+
+    input {
+        display: none;
+    }
+
+    .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: $hover-background;
+        transition: opacity 0.3s;
+        opacity: 0;
+
+        @include before-after {
+            width: 0.8rem;
+            height: 0.8rem;
+            top: calc(50% - 0.4rem);
+            border-radius: 50%;
+            background-color: $background;
+            animation: loading 1s ease infinite;
+        }
+
+        &::before {
+            left: calc(50% - 1.4rem);
+            transform-origin: 1.4rem 50%;
+        }
+
+        &::after {
+            left: calc(50% + 0.6rem);
+            transform-origin: -0.6rem 50%;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: rotate(0deg) translateX(0);
+            }
+
+            90% {
+                transform: rotate(180deg) translateX(0);
+            }
+
+            100% {
+                transform: rotate(180deg) translateX(0);
+            }
+        }
+    }
+
+    &:not(:has(.loading[data-show=true])):hover {
+
+        &::before,
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    &:has(.loading[data-show=true]) {
+        & {
+            pointer-events: none;
+        }
+
+        .loading {
+            opacity: 1;
+        }
+    }
+}
+
+.errorMessage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s;
+
+    &[data-open=true] {
+        height: 1.8em;
+    }
+
+    div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 0.65rem;
+        height: 1.8em;
+        line-height: 1.8em;
+        border-radius: 0.25rem;
+        width: fit-content;
+        background-color: $input-error;
+    }
+}

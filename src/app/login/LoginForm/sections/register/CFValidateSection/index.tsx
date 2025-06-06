@@ -58,7 +58,7 @@ export default function CFValidateSection(props: propsType): ReactNode {
             setErrorMessage("未知的錯誤，請稍後再試");
             setSection(SectionState.REGISTER_CF_VALIDATE);
         })
-    }, [email, code]);
+    }, [email, code, setIdentifyCode, setSection]);
 
     useEffect(() => {
         setWindowWidth(window.innerWidth);

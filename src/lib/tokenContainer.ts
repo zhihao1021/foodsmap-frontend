@@ -12,7 +12,7 @@ export const tokenContainer = {
     async getToken(): Promise<string | null> {
         const container = tokenLocalStorage.getStore();
         if (container === undefined) {
-            const { cookies } = require("next/headers");
+            const { cookies } = (await import("next/headers"));
             const cookiesList = await cookies();
             return cookiesList.get("access_token")?.value ?? null;
         }

@@ -1,0 +1,78 @@
+.navigateBar {
+    position: fixed;
+    font-size: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &[data-mobile=true] {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.75rem calc(50vw - $max-contexnt-width / 2);
+        border-top: 1px solid $disabled-darker;
+        backdrop-filter: blur(10px);
+        font-size: 1.75rem;
+    }
+
+    &[data-mobile=false] {
+        flex-direction: column;
+        top: 0;
+        height: 100%;
+        left: calc(max(50% - $max-contexnt-width / 2, 0px));
+        padding: 0.5rem 1rem;
+        justify-content: flex-start;
+        gap: 2vh;
+        box-sizing: border-box;
+        font-size: 2.25rem;
+
+        a {
+            position: relative;
+
+            &::after {
+                content: attr(data-display-name);
+                position: absolute;
+                left: 80%;
+                top: calc(50% - 0.95rem);
+                font-size: 1.15rem;
+                width: calc(var(--text-count) * 1em);
+                padding: 0.15em 0.5em;
+                border-radius: 0.25em;
+                color: $background;
+                background-color: $context;
+                pointer-events: none;
+                opacity: 0;
+                transition: left 0.3s, opacity 0.3s;
+            }
+
+            &:hover::after {
+                left: calc(100% + 0.25rem);
+                opacity: 1;
+            }
+        }
+    }
+
+    .imageBox,
+    a {
+        display: block;
+        height: 1.25em;
+        width: 1.25em;
+        text-align: center;
+        color: $disabled-darker;
+        transition: color 0.3s;
+
+        &[data-selected=true],
+        &:hover {
+            color: $context;
+        }
+    }
+
+    .imageBox {
+        position: relative;
+
+        img {
+            object-fit: contain;
+        }
+    }
+}

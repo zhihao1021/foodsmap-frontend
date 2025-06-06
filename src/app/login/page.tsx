@@ -1,5 +1,6 @@
+"use server";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
 import { ReactNode } from "react";
 

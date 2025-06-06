@@ -1,3 +1,4 @@
+"use client"
 import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, RefObject, useEffect, useRef } from "react";
 
 import styles from "./index.module.scss";
