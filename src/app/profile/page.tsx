@@ -3,30 +3,36 @@ import { ReactNode } from "react";
 
 import getCurrentUserData from "@/api/user/getCurrentUserData";
 
-import useTokenCache from "@/lib/useTokenCache";
+import tokenCache from "@/lib/useTokenCache";
 
 import BasicData from "./BasicData";
 import ChangeEmail from "./ChangeEmail";
 
 import styles from "./page.module.scss";
+import { redirect } from "next/navigation";
 
-const getUserData = useTokenCache(getCurrentUserData, [], { tags: ["userData"] });
+const getUserData = tokenCache(getCurrentUserData, [], { tags: ["userData"] });
 
 export default async function ProfilePage(): Promise<ReactNode> {
-    const {
-        username,
-        displayName,
-        email,
-    } = await getUserData();
+    try {
+        const {
+            username,
+            displayName,
+            email,
+        } = await getUserData();
 
-    return <div className={styles.profile}>
-        <h1>帳號設定</h1>
-        <BasicData
-            username={username}
-            displayName={displayName}
-        />
-        <ChangeEmail
-            email={email}
-        />
-    </div>;
+        return <div className={styles.profile}>
+            <h1>帳號設定</h1>
+            <BasicData
+                username={username}
+                displayName={displayName}
+            />
+            <ChangeEmail
+                email={email}
+            />
+        </div>;
+    }
+    catch {
+        redirect("/login");
+    }
 };

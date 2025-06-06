@@ -1,7 +1,7 @@
 "use client";
 import { jwtDecode } from "jwt-decode";
-import localforage from "localforage";
 import { ReactNode, useEffect } from "react";
+import Cookies from "js-cookie";
 
 import JWTPayload from "@/schemas/jwtPayload";
 import refreshToken from "@/api/auth/refreshToken";
@@ -17,9 +17,11 @@ export default function AutoRefresh(): ReactNode {
                 const jwtData = jwtDecode(token) as JWTPayload;
 
                 const now = Date.now() / 1000;
-                // if (!jwtData.exp || jwtData.exp - now > 24 * 60 * 60) {
-                //     return;
-                // }
+                if (process.env.NODE_ENV !== "development") {
+                    if (!jwtData.exp || jwtData.exp - now > 24 * 60 * 60) {
+                        return;
+                    }
+                }
 
                 refreshToken().then(jwt => {
                     const {
@@ -27,15 +29,20 @@ export default function AutoRefresh(): ReactNode {
                         token_type,
                     } = jwt;
 
-                    localforage.setItem("access_token", access_token);
-
                     localStorage.setItem("access_token", access_token);
                     localStorage.setItem("token_type", token_type);
+
+                    Cookies.set("access_token", access_token, {
+                        path: process.env.NEXT_PUBLIC_BASE_PATH,
+                        secure: true,
+                        sameSite: "Strict",
+                    });
                 });
             }
             catch { }
         };
 
+        refresh();
         setInterval(() => refresh(), 60 * 1000 * 1000); // 1 hour
     }, []);
 

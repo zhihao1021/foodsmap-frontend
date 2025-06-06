@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, useEffect } from "react";
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
 
 import InputBox from "../InputBox";
 
@@ -12,6 +12,7 @@ type propsType = Readonly<{
     icon: string,
     inputBoxClassName?: string,
     footer?: ReactNode,
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     setValue?: (value: any) => void,
     focusOnEnabled?: boolean,
 }>

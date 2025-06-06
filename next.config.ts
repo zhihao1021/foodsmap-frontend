@@ -10,8 +10,9 @@ const nextConfig: NextConfig = {
       @use "@/styles/colors" as *;
       @use "@/styles/templates" as *;
       @use "@/styles/variables" as *;
-    `
-  }
+    `,
+  },
+
 };
 
 export default nextConfig;

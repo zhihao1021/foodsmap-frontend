@@ -37,3 +37,9 @@
         @content;
     }
 }
+
+
+@mixin l1-page {
+    width: min(100%, 58rem);
+    margin: auto;
+}

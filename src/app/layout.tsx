@@ -3,9 +3,9 @@ import { Noto_Sans_TC } from "next/font/google";
 
 import SWRegister from "@/components/SWRegister";
 import AutoRefresh from "@/components/AutoRefresh";
-import TopBar from "@/components/TopBar";
 
 import "./globals.scss";
+import NavigateBar from "@/components/NavigateBar";
 
 const notoSansTC = Noto_Sans_TC({
   variable: "--font-noto-sans-tc",
@@ -40,10 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <body> */}
       <body className={`${notoSansTC.variable}`}>
-        <TopBar />
         {children}
+        <NavigateBar />
         <SWRegister />
         <AutoRefresh />
       </body>

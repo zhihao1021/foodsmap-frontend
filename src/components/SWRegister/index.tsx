@@ -1,12 +1,11 @@
 "use client";
-import localforage from "localforage";
 import { ReactNode, useEffect } from "react";
 
 export default function SWRegister(): ReactNode {
     useEffect(() => {
-        localforage.config({
-            storeName: "foodsmap"
-        });
+        // localforage.config({
+        //     storeName: "foodsmap"
+        // });
 
         const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
         if ("serviceWorker" in navigator) {

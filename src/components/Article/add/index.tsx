@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.scss";
 import InputBox from "@/components/InputBox";
 
@@ -9,7 +9,7 @@ export default function AddArticle() {
     const [message, setMessage] = useState("");
     const [mediaList, setMediaList] = useState<File[]>([]);
     const [mediaPreview, setMediaPreview] = useState<string[]>([]);
-    const [hashtags, setHashtags] = useState<string[]>([]);
+    // const [hashtags, setHashtags] = useState<string[]>([]);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // const files = e.target.files ? e.target.files[0] : null;
         const files = e.target.files;

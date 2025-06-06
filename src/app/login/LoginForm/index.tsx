@@ -98,7 +98,7 @@ export default function LoginForm(): ReactNode {
         setSection(SectionState.RESULT);
 
         setTimeout(() => {
-            router.push("/profile");
+            router.push("/");
         }, 2600)
     }, [setSection]);
 

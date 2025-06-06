@@ -1,8 +1,7 @@
 .profile {
-    width: min(100%, 56rem);
-    margin: auto;
+    @include l1-page;
+
     font-size: 1.25rem;
-    padding-top: 4rem;
 
     .field {
         display: flex;
