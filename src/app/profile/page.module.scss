@@ -21,11 +21,44 @@
     box-shadow: 0 1px 8px -3px $context;
 }
 
-.title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: $primary;
+.titleBox {
+    display: flex;
+    gap: 10px;
+
+    // justify-content: center;
+
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        margin-top: 0;
+        color: $primary;
+    }
+
+    .googleMapURL {
+        display: inline-block;
+        margin-top: 7.5px;
+        font-size: 1.3rem;
+        color: #fe7e39;
+        // text-decoration: bold;
+        font-variation-settings: "wght" 500; // 使 Material Symbol 變粗
+        cursor: pointer;
+
+        &:hover {
+            color: #c64601;
+            text-decoration: none;
+        }
+    }
+
+    .date {
+        top: 12px;
+        right: 16px;
+        font-size: 14px;
+        color: #888;
+        font-style: italic;
+        margin-top: 0px;
+        margin-left: auto; // 使日期靠右對齊
+    }
 }
 
 .content {
@@ -59,29 +92,13 @@
     }
 }
 
-// .imageList {
-//     display: flex;
-//     flex-wrap: wrap;
-//     gap: 12px; // 圖片之間的間距
-
-//     .image {
-//         margin-top: 12px;
-//         width: 200px;
-//         max-width: 100%;
-//         height: auto;
-//         border-radius: 8px;
-//         object-fit: cover;
-//     }
-// }
 .imageList {
     display: flex;
     overflow-x: auto;
     gap: 12px;
     margin-top: 16px;
     padding: 6px 0;
-
     scrollbar-width: none; // Firefox
-
     transition: transform 0.2s ease, padding-left 0.2s ease;
 
     &::-webkit-scrollbar {
@@ -108,6 +125,19 @@
     }
 }
 
+// .googleMapURL {
+//   display: inline-block;
+//   margin-top: 12px;
+//   font-size: 16px;
+//   color: #fe7e39;
+//   text-decoration: underline;
+//   cursor: pointer;
+
+//   &:hover {
+//     color: #c64601;
+//     text-decoration: none;
+//   }
+// }
 
 .overlay {
     position: fixed;

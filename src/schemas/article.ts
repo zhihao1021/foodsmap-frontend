@@ -5,5 +5,7 @@ export interface Article {
     like: number,
     tags: string[],
     author: string,
+    date: number,
     mediaURL: string[],
+    googleMapURL: string
 } 

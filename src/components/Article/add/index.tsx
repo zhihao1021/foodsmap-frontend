@@ -90,7 +90,7 @@ export default function AddArticle() {
                         multiple
                         onChange={handleFileChange}
                     />
-                    <span className="ms">photo_library</span>
+                    <span className={`ms-nf ${styles.photo_library}`}>photo_library</span>
                 </label>
             </div>
 
