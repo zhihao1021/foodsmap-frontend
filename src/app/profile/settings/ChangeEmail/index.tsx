@@ -41,6 +41,9 @@ export default function ChangeEmail(props: propsType): ReactNode {
     const [oldValidateCode, setOldValidateCode] = useState<string>("");
     const [validateCode, setValidateCode] = useState<string>("");
     const [newEmail, setNewEmail] = useState<string>("");
+    const [infoMessage, setInfoMessage] = useState<string>("");
+    const [realInfoMessage, setRealInfoMessage] = useState<string>("");
+    const [showInfoMessage, setShowInfoMessage] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [realErrorMessage, setRealErrorMessage] = useState<string>("");
     const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
@@ -181,12 +184,13 @@ export default function ChangeEmail(props: propsType): ReactNode {
         (isOrigin ? validateSelfEmail : validateEmail)({
             email: isOrigin ? email : newEmail,
             code: cfCode,
-        }).then(
-            identifyCode => {
-                (isOrigin ? setOldIdentifyCode : setIdentifyCode)(identifyCode);
-                setState(nextState);
-            }
-        ).catch((error: AxiosError) => {
+        }).then(identifyCode => {
+            (isOrigin ? setOldIdentifyCode : setIdentifyCode)(identifyCode);
+            setState(nextState);
+            setInfoMessage(`已寄送驗證碼至 ${isOrigin ? email : newEmail}`);
+            setShowInfoMessage(true);
+            setTimeout(() => setShowInfoMessage(false), 5000);
+        }).catch((error: AxiosError) => {
             const status = error.response?.status;
             switch (status) {
                 case 400:
@@ -219,6 +223,15 @@ export default function ChangeEmail(props: propsType): ReactNode {
         if (onResize === undefined) return;
         window.removeEventListener("resize", onResize);
     }, [onResize])
+
+    useEffect(() => {
+        setShowInfoMessage(infoMessage !== "");
+        if (infoMessage) setRealInfoMessage(infoMessage);
+    }, [infoMessage]);
+
+    useEffect(() => {
+        if (!showInfoMessage) setInfoMessage("");
+    }, [showInfoMessage]);
 
     useEffect(() => {
         setShowErrorMessage(errorMessage !== "");
@@ -322,6 +335,9 @@ export default function ChangeEmail(props: propsType): ReactNode {
                 show={state === State.LOADING}
             />
         </div>
+        <div className={styles.infoMessage} data-open={showInfoMessage}>
+            <div>{realInfoMessage}</div>
+        </div >
         <div className={styles.errorMessage} data-open={showErrorMessage}>
             <div>{realErrorMessage}</div>
         </div >

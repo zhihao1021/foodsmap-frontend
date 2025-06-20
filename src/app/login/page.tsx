@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
 import { ReactNode } from "react";
 
-import JWTPayload from "@/schemas/jwtPayload";
+import { JWTPayload } from "@/schemas/jwt";
 
 import OAuthButton from "@/components/OAuthButton";
 

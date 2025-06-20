@@ -1,9 +1,7 @@
 "use client";
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
-import checkIsMobile from "@/utils/detectmobilebrowser";
 
 import logo from "@/assets/logo.png";
 
@@ -50,14 +48,14 @@ function checkIsCurrentPath(path: string, pathname: string): boolean {
     return pathname.startsWith(path);
 }
 
-export default function NavigateBar(): ReactNode {
+type propsType = Readonly<{
+    isMobile?: boolean
+}>;
+
+export default function NavigateBar(props: propsType): ReactNode {
+    const { isMobile } = props;
+
     const pathname = usePathname();
-
-    const [isMobile, setIsMobile] = useState<boolean>();
-
-    useEffect(() => {
-        setIsMobile(checkIsMobile());
-    }, []);
 
     return <div className={styles.navigateBar} data-mobile={isMobile}>
         {!isMobile && <div className={styles.imageBox}>

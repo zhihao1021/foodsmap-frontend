@@ -3,7 +3,8 @@ import { jwtDecode } from "jwt-decode";
 import { ReactNode, useEffect } from "react";
 import Cookies from "js-cookie";
 
-import JWTPayload from "@/schemas/jwtPayload";
+import { JWTPayload } from "@/schemas/jwt";
+
 import refreshToken from "@/api/auth/refreshToken";
 
 export default function AutoRefresh(): ReactNode {

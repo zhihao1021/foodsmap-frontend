@@ -4,8 +4,8 @@ import { ChangeEvent, ReactNode, useCallback, useEffect, useRef, useState } from
 import getAvatarSrc from "@/utils/getAvatarSrc";
 
 import styles from "./index.module.scss";
-import Image from "next/image";
 import updateCurrentUserAvatar from "@/api/avatar/updateCurrentUserAvatar";
+import Image from "next/image";
 
 type propsType = Readonly<{
     id: string
@@ -29,9 +29,11 @@ export default function UpdateAvatar(props: propsType): ReactNode {
         setLoading(true);
         updateCurrentUserAvatar(file).then(() => {
             setSrc(`${getAvatarSrc(id)}?t=${Date.now()}`);
-        }).catch(() => setErrorMessage("變更失敗")).finally(() => {
-            if (fileRef.current) fileRef.current.value = "";
+        }).catch(() => {
+            setErrorMessage("變更失敗");
             setLoading(false);
+        }).finally(() => {
+            if (fileRef.current) fileRef.current.value = "";
         });
     }, [id]);
 
@@ -50,7 +52,9 @@ export default function UpdateAvatar(props: propsType): ReactNode {
     return <>
         <h2>更換頭像</h2>
         <label className={styles.avatarBox}>
-            <Image alt="avatar" src={src} fill />
+            <div className={styles.imageBox}>
+                <Image alt="avatar" fill unoptimized src={src} onLoad={() => setLoading(false)} />
+            </div>
             <input
                 ref={fileRef}
                 type="file"

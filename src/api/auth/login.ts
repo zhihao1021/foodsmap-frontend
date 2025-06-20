@@ -1,6 +1,7 @@
 import request from "@/config/axios";
 
-import JWT from "@/schemas/jwt";
+import { JWT } from "@/schemas/jwt";
+
 import LoginMethod from "@/schemas/loginMethods";
 
 export default async function login(data: {

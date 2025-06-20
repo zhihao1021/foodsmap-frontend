@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 
 import InputBox from "@/components/InputBox";
 
@@ -10,7 +10,7 @@ export default function SearchPage(): ReactNode {
     const searchParams = useSearchParams();
 
     const [searchText, setSearchText] = useState<string>(searchParams.get("q") || "");
-    const [results, setResults] = useState<[]>([]);
+    // const [results, setResults] = useState<[]>([]);
 
     return <>
         <div className={styles.searchBar}>
