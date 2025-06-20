@@ -1,0 +1,162 @@
+.container {
+    padding-top: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.user {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.articleCard {
+    // background-color: #ffffff;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px -3px $context;
+}
+
+.titleBox {
+    display: flex;
+    gap: 10px;
+
+    // justify-content: center;
+
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        margin-top: 0;
+        color: $primary;
+    }
+
+    .googleMapURL {
+        display: inline-block;
+        margin-top: 7.5px;
+        font-size: 1.3rem;
+        color: #fe7e39;
+        // text-decoration: bold;
+        font-variation-settings: "wght" 500; // 使 Material Symbol 變粗
+        cursor: pointer;
+
+        &:hover {
+            color: #c64601;
+            text-decoration: none;
+        }
+    }
+
+    .date {
+        top: 12px;
+        right: 16px;
+        font-size: 14px;
+        color: #888;
+        font-style: italic;
+        margin-top: 0px;
+        margin-left: auto; // 使日期靠右對齊
+    }
+}
+
+.content {
+    font-size: 18px;
+    color: $context;
+    margin-bottom: 16px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; // 確保垂直對齊
+    font-size: 18px;
+    margin-top: 8px;
+
+    .likes {
+        display: flex;
+        align-items: center;
+        gap: 6px; // Icon 和數字的間距
+        color: $context;
+
+        span:first-child {
+            margin-top: 0.15rem;
+        }
+    }
+
+    .tags {
+        font-style: italic;
+        color: $secondary;
+        white-space: nowrap;
+    }
+}
+
+.imageList {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 6px 0;
+    scrollbar-width: none; // Firefox
+    transition: transform 0.2s ease, padding-left 0.2s ease;
+
+    &::-webkit-scrollbar {
+        display: none; // Chrome
+    }
+
+    .image {
+        width: 160px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &:has(.image:first-child:hover) {
+        padding-left: 6px;
+        transform: translateX(-6px);
+    }
+}
+
+// .googleMapURL {
+//   display: inline-block;
+//   margin-top: 12px;
+//   font-size: 16px;
+//   color: #fe7e39;
+//   text-decoration: underline;
+//   cursor: pointer;
+
+//   &:hover {
+//     color: #c64601;
+//     text-decoration: none;
+//   }
+// }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+        height: 80%;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        cursor: pointer; // 加上手形提示可以點擊
+    }
+}

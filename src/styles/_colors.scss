@@ -1,7 +1,7 @@
 @mixin color-map {
     @media (prefers-color-scheme: dark) {
-        --color-primary: #d66829;
-        --color-secondary: #75300a;
+        --color-primary: #d66829; //可以調整 暗色主題的主色調
+        --color-secondary: #75300a; //可以調整 暗色主題的主色調
         --color-accent: #c64601;
 
         --color-context: #f4ece7;
@@ -13,8 +13,8 @@
 
 $context: var(--color-context, #18100b);
 $background: var(--color-background, #fcf9f8);
-$primary: var(--color-primary, #d66829);
-$secondary: var(--color-secondary, #f5af8a);
+$primary: var(--color-primary, #d66829); //可以調整 亮色主題的主色調
+$secondary: var(--color-secondary, #f5af8a);//可以調整 亮色主題的主色調
 $accent: var(--color-accent, #fe7e39);
 
 $hover-background: var(--color-hover-background, #88888866);
