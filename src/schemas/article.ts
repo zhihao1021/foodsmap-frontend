@@ -4,14 +4,19 @@ type Article = Readonly<{
     id: string,
     title: string,
     context: string,
-    likes: number,
     createTime: number,
     editTime: number,
     tags: string[],
     author: GlobalUser,
-    mediaUrl: string,
+    mediaList: string[],
     googleMapUrl: string,
     likesCount: number,
 }>;
 
-export type { Article };
+type ArticleCreate = {
+    title: string,
+    context: string,
+    googleMapUrl: string,
+};
+
+export type { Article, ArticleCreate };

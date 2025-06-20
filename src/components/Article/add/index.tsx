@@ -2,10 +2,11 @@
 import { useState } from "react";
 import styles from "./index.module.scss";
 import InputBox from "@/components/InputBox";
+import createNewArticle from "@/api/article/createNewArticle";
 
 export default function AddArticle() {
     const [title, setTitle] = useState<string>("");
-    const [content, setContent] = useState<string>("");
+    const [context, setContext] = useState<string>("");
     const [message, setMessage] = useState("");
     const [mediaList, setMediaList] = useState<File[]>([]);
     const [mediaPreview, setMediaPreview] = useState<string[]>([]);
@@ -15,7 +16,7 @@ export default function AddArticle() {
         const files = e.target.files;
         if (files) {
             // 加上新的 File
-            
+
             const fileArray = Array.from(files);
             setMediaList((prevList) => [...prevList, ...fileArray]);
             setMediaPreview(prev => [...prev, ...fileArray.map(file => URL.createObjectURL(file))]);
@@ -27,19 +28,27 @@ export default function AddArticle() {
         //     setMessage("未選擇檔案");
         // }
     };
+
     const handleSubmit = () => {
         // Handle form submission logic here
-        if (!title || !content) {
+        if (!title || !context) {
             setMessage("請填寫所有欄位");
             return;
         }
         console.log("Title:", title);
-        console.log("Content:", content);
-        setMessage("文章新增成功！");
-        setTitle("");
-        setContent("");
-        setMediaList([]);
-        setMediaPreview([]);
+        console.log("Content:", context);
+
+        createNewArticle({
+            title: title,
+            context: context,
+            googleMapUrl: "",
+        }, mediaList).then(() => {
+            setMessage("文章新增成功！");
+            setTitle("");
+            setContext("");
+            setMediaList([]);
+            setMediaPreview([]);
+        })
     };
     const handleRemoveMedia = (indexToRemove: number) => {
         setMediaPreview(prev => prev?.filter((_, i) => i !== indexToRemove) || []);
@@ -59,8 +68,8 @@ export default function AddArticle() {
             {/* <label className={styles.label}>內容</label> */}
             <textarea
                 className={styles.textarea}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={context}
+                onChange={(e) => setContext(e.target.value)}
                 placeholder="輸入文章內容"
             />
 
