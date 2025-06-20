@@ -8,7 +8,7 @@ export default async function createNewArticle(data: ArticleCreate, files: File[
     files.forEach((file) => {
         formData.append("files", file);
     });
-    const response = await request.put<Article>(`/article/${newArticleResponse.data.id}/files`, formData)
+    const response = await request.put<Article>(`/article/by-id/${newArticleResponse.data.id}/files`, formData)
 
     return response.data;
 }
