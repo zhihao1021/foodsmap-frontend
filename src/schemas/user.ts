@@ -1,11 +1,17 @@
-export default interface User {
+type User = {
     id: string;
     username: string;
     displayName: string;
     email: string;
 }
 
-export interface UserCreate {
+type GlobalUser = {
+    id: string,
+    username: string,
+    displayName: string,
+};
+
+type UserCreate = {
     email: string,
     username: string,
     displayName: string,
@@ -15,7 +21,7 @@ export interface UserCreate {
     identifyCode: string
 }
 
-export interface UserUpdate {
+type UserUpdate = {
     email?: string,
     displayName?: string,
     password?: string,
@@ -26,3 +32,4 @@ export interface UserUpdate {
     identifyCode?: string,
 }
 
+export type { User, GlobalUser, UserCreate, UserUpdate };

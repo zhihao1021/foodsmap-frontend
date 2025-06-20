@@ -1,4 +1,4 @@
-import User, { UserUpdate } from "@/schemas/user";
+import { User, UserUpdate } from "@/schemas/user";
 
 import request from "@/config/axios";
 

@@ -10,7 +10,7 @@ import {
 } from "react";
 
 import LoginMethod from "@/schemas/loginMethods";
-import JWT from "@/schemas/jwt";
+import { JWT } from "@/schemas/jwt";
 
 import register from "@/api/auth/register";
 

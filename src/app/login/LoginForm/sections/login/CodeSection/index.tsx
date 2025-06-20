@@ -6,7 +6,7 @@ import {
     useState
 } from "react";
 
-import JWT from "@/schemas/jwt";
+import { JWT } from "@/schemas/jwt";
 import LoginMethod from "@/schemas/loginMethods";
 
 import login from "@/api/auth/login";

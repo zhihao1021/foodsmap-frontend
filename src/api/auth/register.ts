@@ -1,5 +1,6 @@
 import request from "@/config/axios";
-import JWT from "@/schemas/jwt";
+
+import { JWT } from "@/schemas/jwt";
 import { UserCreate } from "@/schemas/user";
 
 export default async function register(data: UserCreate): Promise<JWT> {
