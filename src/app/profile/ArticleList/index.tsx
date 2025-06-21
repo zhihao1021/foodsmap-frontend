@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import type { Article } from "@/schemas/article";
 
 import getUserArticlesById from "@/api/user/getUserArticlesById";
+import getAvatarSrc from "@/utils/getAvatarSrc";
 
 import styles from "./index.module.scss";
 
@@ -54,60 +55,72 @@ export default function ArticleList(props: propsType): ReactNode {
             <h1 className={styles.user}>使用者：{userId}</h1>
             {articles.map((article) => (
                 <>
-                    <div key={article.id} className={styles.articleCard}>
-                        <button className={`ms-nf ${styles.more}`}
-                            onClick={() => setOpenMenuId(openMenuId === article.id ? null : article.id)}
-
-                        >more_horiz
-                        </button>
-
-                        {openMenuId === article.id && (
-                            <div className={styles.menu} ref={menuRef}>
-                                <button onClick={() => handleEdit(article)}> 編輯</button>
-                                <button onClick={() => handleDelete(article.id)}> 刪除</button>
-                            </div>
-                        )}
-
-                        <div className={styles.titleBox}>
-                            <h2 className={styles.title}>{article.title}</h2>
-                            <a className={`ms-nf ${styles.googleMapUrl}`}
-                                href={article.googleMapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            // >location_on
-                            >pin_drop
-                            </a>
-                            <div className={styles.createTime}>
-                                {article.createTime && new Date(article.createTime).toLocaleDateString()}
-                            </div>
+                    <div key={article.id} className={styles.articleHeader}>
+                        <div className={styles.authorInfo}>
+                            {(
+                                <img src={getAvatarSrc(article.author.id)} alt="avatar" className={styles.avatar} />
+                            )}
+                            <span className={styles.author}>{article.author.displayName}</span>
                         </div>
 
-                        <p className={styles.context}>{article.context}</p>
 
-                        <div className={styles.footer}>
-                            <div className={styles.likes}>
-                                <span className="ms-nf">thumb_up</span>
-                                <span>{article.likesCount}</span>
+
+                        <div key={article.id} className={styles.articleCard}>
+                            <button className={`ms-nf ${styles.more}`}
+                                onClick={() => setOpenMenuId(openMenuId === article.id ? null : article.id)}
+
+                            >more_horiz
+                            </button>
+
+                            {openMenuId === article.id && (
+                                <div className={styles.menu} ref={menuRef}>
+                                    <button onClick={() => handleEdit(article)}> 編輯</button>
+                                    <button onClick={() => handleDelete(article.id)}> 刪除</button>
+                                </div>
+                            )}
+
+
+                            <div className={styles.titleBox}>
+                                <h2 className={styles.title}>{article.title}</h2>
+                                <a className={`ms-nf ${styles.googleMapUrl}`}
+                                    href={article.googleMapUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                // >location_on
+                                >pin_drop
+                                </a>
+                                <div className={styles.createTime}>
+                                    {article.createTime && new Date(article.createTime).toLocaleDateString()}
+                                </div>
                             </div>
-                            <span className={styles.tags}>
-                                {article.tags.map((tag) => `#${tag} `)}
-                            </span>
-                        </div>
-                        <div className={styles.imageList}>
-                            {
-                                // article.mediaUrl.map((url, index) => (
-                                //     <img
-                                //         key={index}
-                                //         // src={article.mediaURL[index]}
-                                //         src={url}
-                                //         alt="article image"
-                                //         className={styles.image}
-                                //         onClick={() => setZoomImage(url)}
-                                //     />
-                                // ))
-                            }
-                        </div>
-                        {/* {article.googleMapUrl && (
+
+                            <p className={styles.context}>{article.context}</p>
+
+                            <div className={styles.footer}>
+                                <span className={styles.tags}>
+                                    {article.tags.map((tag) => `#${tag} `)}
+                                </span>
+                                <div className={styles.likes}>
+                                    <span className="ms-nf">thumb_up</span>
+                                    <span>{article.likesCount}</span>
+                                </div>
+
+                            </div>
+                            <div className={styles.imageList}>
+                                {
+                                    // article.mediaUrl.map((url, index) => (
+                                    //     <img
+                                    //         key={index}
+                                    //         // src={article.mediaURL[index]}
+                                    //         src={url}
+                                    //         alt="article image"
+                                    //         className={styles.image}
+                                    //         onClick={() => setZoomImage(url)}
+                                    //     />
+                                    // ))
+                                }
+                            </div>
+                            {/* {article.googleMapUrl && (
                         <a
                             href={article.googleMapUrl}
                             target="_blank"
@@ -117,8 +130,9 @@ export default function ArticleList(props: propsType): ReactNode {
                             check Google Map
                         </a>
                     )} */}
+                        </div>
+                        <hr className={styles.hr} />
                     </div>
-                    {/* <hr className={styles.hr} /> */}
                 </>
             ))}
 
