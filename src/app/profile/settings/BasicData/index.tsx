@@ -6,7 +6,7 @@ import updateCurrentUserData from "@/api/user/updateCurrentUserData";
 import InputBox from "@/components/InputBox";
 import LoadingStrip from "@/components/LoadingStrip";
 
-import updateUserDataAction from "@/actions/updateUserDataAction";
+import updateCurrentUserDataAction from "@/actions/updateCurrentUserDataAction";
 
 import shareStyles from "../share.module.scss";
 import styles from "./index.module.scss";
@@ -36,7 +36,7 @@ export default function BasicData(props: propsType): ReactNode {
         updateCurrentUserData({
             displayName: newDisplayName
         }).then(
-            () => updateUserDataAction()
+            () => updateCurrentUserDataAction()
         ).then(() => {
             setResult(true);
             setMessage("更新成功！");

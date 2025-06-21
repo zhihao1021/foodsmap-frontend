@@ -11,6 +11,9 @@
         --color-background: #070403;
 
         --color-hover-background: #333333AA;
+
+        --scrollbar-background: #333333;
+        --scrollbar-background-hover: #555555;
     }
 }
 
@@ -20,10 +23,12 @@ $background: var(--color-background, #fcf9f8);
 // $secondary: var(--color-secondary, #f5af8a);//可以調整 亮色主題的主色調
 // $accent: var(--color-accent, #fe7e39);
 $primary: var(--color-primary, #8397b3); //可以調整 亮色主題的主色調
-$secondary: var(--color-secondary, #4e86e8);//可以調整 亮色主題的主色調
+$secondary: var(--color-secondary, #4e86e8); //可以調整 亮色主題的主色調
 $accent: var(--color-accent, #1d63dc);
 $hover-background: var(--color-hover-background, #88888866);
 
+$scrollbar-background: var(--scrollbar-background, #CCCCCC);
+$scrollbar-background-hover: var(--scrollbar-background-hover, #AAAAAA);
 // $box-context: #000000;
 // $box-background: #FFFFFF;
 

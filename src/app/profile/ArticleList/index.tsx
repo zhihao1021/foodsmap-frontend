@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 import getArticleMediaSrc from "@/utils/getArticleMediaSrc";
 import Link from "next/link";
 import deleteArticle from "@/api/article/deleteArticle"; // 接下來會做的 API
+import ArticleCard from "@/components/ArticleCard";
 
 
 type propsType = Readonly<{
@@ -52,6 +53,7 @@ export default function ArticleList(props: propsType): ReactNode {
     return (
         <main className={styles.container}>
             <h1 className={styles.user}>使用者：{userId}</h1>
+            {articles[0] && <ArticleCard data={articles[0]} zoomImage={setZoomImage} />}
             {articles.map((article) => (
                 <div key={article.id} className={styles.articleHeader}>
                     <div className={styles.authorInfo}>

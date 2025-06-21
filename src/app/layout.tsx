@@ -49,20 +49,18 @@ export default async function RootLayout({
     const isMobile = checkIsMobile(headerList.get("user-agent") || "");
 
     let userData = null;
-    try { await getCurrentUserDataCache(); }
+    try { userData = await getCurrentUserDataCache(); }
     catch { }
 
-    return (
-        <html lang="en">
-            <body className={`${notoSansTC.className}`}>
-                <UserDataContextProvider userData={userData}>
-                    {children}
-                </UserDataContextProvider>
-                <NavigateBar isMobile={isMobile} />
-                <SWRegister />
-                <AutoRefresh />
-                <script>0</script>
-            </body>
-        </html>
-    );
+    return <html lang="en">
+        <body className={`${notoSansTC.className}`}>
+            <UserDataContextProvider userData={userData}>
+                {children}
+            </UserDataContextProvider>
+            <NavigateBar isMobile={isMobile} />
+            <SWRegister />
+            <AutoRefresh />
+            <script>0</script>
+        </body>
+    </html>;
 }

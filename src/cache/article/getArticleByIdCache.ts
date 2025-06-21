@@ -1,10 +1,22 @@
-import tokenCache from "@/lib/useTokenCache";
-
-import getArticleById from "@/api/article/getArticleById";
-import { unstable_cache } from "next/cache";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
-// const getArticleByIdCache = cache(unstable_cache(getArticleById, [], { revalidate: 3600 }));
-const getArticleByIdCache = getArticleById;
+import { Article } from "@/schemas/article";
 
-export default getArticleByIdCache;
+const cacheFuncMap: {
+    [key: string]: (articleId: string) => Promise<Article>
+} = {}
+
+export default async function getArticleById(articleId: string): Promise<Article> {
+    const tag = `article-${articleId}`;
+    if (cacheFuncMap[tag]) {
+        return await cacheFuncMap[tag](articleId);
+    }
+
+    const cacheFunction = cache(unstable_cache(
+        getArticleById
+    ));
+    cacheFuncMap[tag] = cacheFunction;
+
+    return await cacheFunction(articleId);
+}

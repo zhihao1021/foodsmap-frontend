@@ -1,19 +1,22 @@
 "use client";
+import { AxiosError } from "axios";
+import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 import { CSSProperties, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import shareStyles from "../share.module.scss";
-import styles from "./index.module.scss";
-import LoadingStrip from "@/components/LoadingStrip";
-import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
-import InputBox from "@/components/InputBox";
 import validateSelfEmail from "@/api/auth/validateSelfEmail";
-import { AxiosError } from "axios";
 import updateCurrentUserData from "@/api/user/updateCurrentUserData";
 import validateEmail from "@/api/auth/validateEmail";
 import preCheckEmail from "@/api/auth/preCheckEmail";
 import checkEmail from "@/api/auth/checkEmail";
-import updateUserDataAction from "@/actions/updateUserDataAction";
 
+import InputBox from "@/components/InputBox";
+import LoadingStrip from "@/components/LoadingStrip";
+
+import updateCurrentUserDataAction from "@/actions/updateCurrentUserDataAction";
+
+import shareStyles from "../share.module.scss";
+
+import styles from "./index.module.scss";
 
 enum State {
     LOADING = -1,
@@ -143,7 +146,7 @@ export default function ChangeEmail(props: propsType): ReactNode {
             emailValidCode: validateCode,
             identifyCode: identifyCode,
         }).then(
-            () => updateUserDataAction()
+            () => updateCurrentUserDataAction()
         ).then(() => {
             setState(State.SUCCESS);
             setShowState(State.SUCCESS);

@@ -126,3 +126,19 @@ h2 {
     "GRAD" 0,
     "opsz" 48;
 }
+
+*::-webkit-scrollbar {
+  background-color: transparent;
+  height: 0.4rem;
+  width: 0.4rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-background;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $scrollbar-background-hover;
+  }
+}

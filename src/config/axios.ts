@@ -13,6 +13,7 @@ clientRequest.interceptors.request.use(config => {
 })
 
 serverRequest.interceptors.request.use(async config => {
+    console.debug(`DEBUG [Axios] Requesting: ${config.method?.toUpperCase()} ${config.url}`);
     config.baseURL = process.env.INTERNAL_API_ENDPOINT;
 
     const { tokenContainer } = await import("@/lib/tokenContainer");
