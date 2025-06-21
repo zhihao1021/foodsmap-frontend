@@ -4,6 +4,7 @@
 :root {
   // font-size: min(1rem, 3vw);
   color-scheme: light dark;
+  scrollbar-gutter: stable;
 
   @include color-map;
 }
