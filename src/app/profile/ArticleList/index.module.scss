@@ -8,12 +8,44 @@
     margin: 0 auto;
 }
 
-.user {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    text-align: left;
+.profileBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
+
+.avatarLarge {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.userInfo {
+    text-align: center;
+}
+
+.displayName {
+    font-size: 20px;
+    color:$context;
+}
+.username {
+    font-size: 10px;
+    font-weight: bold;
+    color:$disabled-darker;
+}
+
+
+// .user {
+//     font-size: 10px;
+//     font-weight: bold;
+//     margin-bottom: 40px;
+//     text-align: center;
+//     color: $disabled;
+// }
 
 .hr {
     border: 0;

@@ -15,6 +15,7 @@ export default function EditArticle({ article }: { article: Article }) {
     const [message, setMessage] = useState("");
     const [mediaList, setMediaList] = useState<File[]>([]);
     const [mediaPreview, setMediaPreview] = useState<string[]>([]);
+    const [googleMapUrl, setGoogleMapUrl] = useState<string>(article.googleMapUrl);
     const router = useRouter();
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -42,7 +43,7 @@ export default function EditArticle({ article }: { article: Article }) {
         updateArticle(article.id, {
             title: title,
             context: context,
-            googleMapUrl: "",
+            googleMapUrl: googleMapUrl,
         }).then(() => {
             setMessage("文章編輯成功！");
             router.push(`/profile`); // 返回文章頁面
@@ -60,9 +61,15 @@ export default function EditArticle({ article }: { article: Article }) {
             <h2>編輯文章</h2>
             <div className={styles.container}>
                 <InputBox
-                    className={styles.inputBox}
+                    className={styles.titleInputBox}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+
+                />
+                <InputBox
+                    className={styles.mapInputBox}
+                    value={googleMapUrl}
+                    onChange={(e) => setGoogleMapUrl(e.target.value)}
 
                 />
                 <textarea

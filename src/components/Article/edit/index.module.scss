@@ -1,6 +1,7 @@
-.header{
-      text-align: center;
+.header {
+    text-align: center;
 }
+
 .container {
     padding: 2rem;
     max-width: 600px;
@@ -12,7 +13,12 @@
     margin-bottom: 2rem;
 }
 
-.inputBox {
+.titleInputBox {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.mapInputBox {
     font-size: 1.5rem;
     margin-top: 2rem;
 }

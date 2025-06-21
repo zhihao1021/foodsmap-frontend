@@ -10,6 +10,7 @@ export default function AddArticle() {
     const [message, setMessage] = useState("");
     const [mediaList, setMediaList] = useState<File[]>([]);
     const [mediaPreview, setMediaPreview] = useState<string[]>([]);
+    const [googleMapUrl, setGoogleMapUrl] = useState<string>("");
     // const [hashtags, setHashtags] = useState<string[]>([]);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // const files = e.target.files ? e.target.files[0] : null;
@@ -32,7 +33,7 @@ export default function AddArticle() {
     const handleSubmit = () => {
         // Handle form submission logic here
         if (!title || !context) {
-            setMessage("請填寫所有欄位");
+            setMessage("請填寫標題和內文欄位");
             return;
         }
         console.log("Title:", title);
@@ -41,13 +42,14 @@ export default function AddArticle() {
         createNewArticle({
             title: title,
             context: context,
-            googleMapUrl: "",
+            googleMapUrl: googleMapUrl,
         }, mediaList).then(() => {
             setMessage("文章新增成功！");
             setTitle("");
             setContext("");
             setMediaList([]);
             setMediaPreview([]);
+            setGoogleMapUrl("");
         })
     };
     const handleRemoveMedia = (indexToRemove: number) => {
@@ -60,11 +62,18 @@ export default function AddArticle() {
             <div className={styles.container}>
                 {/* <label className={styles.label}>標題</label> */}
                 <InputBox
-                    className={styles.inputBox}
+                    className={styles.titleInputBox}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     title="文章標題"
                     placeholder="早安美資城"
+                />
+                <InputBox
+                    className={styles.mapInputBox}
+                    value={googleMapUrl}
+                    onChange={(e) => setGoogleMapUrl(e.target.value)}
+                    title="Google Map 連結"
+                    placeholder="https://www.google.com/maps/place/..."
                 />
                 {/* <label className={styles.label}>內容</label> */}
                 <textarea
