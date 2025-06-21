@@ -1,8 +1,11 @@
 @mixin color-map {
     @media (prefers-color-scheme: dark) {
-        --color-primary: #d66829; //可以調整 暗色主題的主色調
-        --color-secondary: #75300a; //可以調整 暗色主題的主色調
-        --color-accent: #c64601;
+        // --color-primary: #d66829; //可以調整 暗色主題的主色調
+        // --color-secondary: #b9490c; //可以%調整 暗色主題的主色調
+        // --color-accent: #c64601;
+        --color-primary: #d1e3ff; //可以調整 暗色主題的主色調
+        --color-secondary: #4e86e8; //可以調整 暗色主題的主色調
+        --color-accent: #1d63dc;
 
         --color-context: #f4ece7;
         --color-background: #070403;
@@ -13,10 +16,12 @@
 
 $context: var(--color-context, #18100b);
 $background: var(--color-background, #fcf9f8);
-$primary: var(--color-primary, #d66829); //可以調整 亮色主題的主色調
-$secondary: var(--color-secondary, #f5af8a);//可以調整 亮色主題的主色調
-$accent: var(--color-accent, #fe7e39);
-
+// $primary: var(--color-primary, #d66829); //可以調整 亮色主題的主色調
+// $secondary: var(--color-secondary, #f5af8a);//可以調整 亮色主題的主色調
+// $accent: var(--color-accent, #fe7e39);
+$primary: var(--color-primary, #8397b3); //可以調整 亮色主題的主色調
+$secondary: var(--color-secondary, #4e86e8);//可以調整 亮色主題的主色調
+$accent: var(--color-accent, #1d63dc);
 $hover-background: var(--color-hover-background, #88888866);
 
 // $box-context: #000000;

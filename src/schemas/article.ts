@@ -19,4 +19,10 @@ type ArticleCreate = {
     googleMapUrl: string,
 };
 
-export type { Article, ArticleCreate };
+type ArticleUpdate = {
+    title?: string,
+    context?: string,
+    googleMapUrl?: string,
+}
+
+export type { Article, ArticleCreate, ArticleUpdate };

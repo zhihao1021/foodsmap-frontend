@@ -1,34 +1,35 @@
 "use client";
+
+import { Article } from "@/schemas/article";
 import { useState } from "react";
 import styles from "./index.module.scss";
 import InputBox from "@/components/InputBox";
-import createNewArticle from "@/api/article/createNewArticle";
+import updateArticle from "@/api/article/updateArticle";
+import { useRouter } from "next/navigation";
+import { profile } from "node:console";
 
-export default function AddArticle() {
-    const [title, setTitle] = useState<string>("");
-    const [context, setContext] = useState<string>("");
+
+export default function EditArticle({ article }: { article: Article }) {
+    const [title, setTitle] = useState<string>(article.title || "");
+    const [context, setContext] = useState<string>(article.context);
     const [message, setMessage] = useState("");
     const [mediaList, setMediaList] = useState<File[]>([]);
     const [mediaPreview, setMediaPreview] = useState<string[]>([]);
-    // const [hashtags, setHashtags] = useState<string[]>([]);
+    const router = useRouter();
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // const files = e.target.files ? e.target.files[0] : null;
         const files = e.target.files;
         if (files) {
             // 加上新的 File
-
             const fileArray = Array.from(files);
             setMediaList((prevList) => [...prevList, ...fileArray]);
             setMediaPreview(prev => [...prev, ...fileArray.map(file => URL.createObjectURL(file))]);
             e.target.value = ''; // 清空 input 的值
         }
-
-        // else {
-        //     setMediaList(null);
-        //     setMessage("未選擇檔案");
-        // }
     };
-
+    const handleRemoveMedia = (indexToRemove: number) => {
+        setMediaPreview(prev => prev?.filter((_, i) => i !== indexToRemove) || []);
+        setMediaList(prev => prev?.filter((_, i) => i !== indexToRemove) || []);
+    };
     const handleSubmit = () => {
         // Handle form submission logic here
         if (!title || !context) {
@@ -38,45 +39,38 @@ export default function AddArticle() {
         console.log("Title:", title);
         console.log("Content:", context);
 
-        createNewArticle({
+        updateArticle(article.id, {
             title: title,
             context: context,
             googleMapUrl: "",
-        }, mediaList).then(() => {
-            setMessage("文章新增成功！");
-            setTitle("");
-            setContext("");
-            setMediaList([]);
-            setMediaPreview([]);
+        }).then(() => {
+            setMessage("文章編輯成功！");
+            router.push(`/profile`); // 返回文章頁面
+            //返回個人頁面
+
+
+            // setTitle("");
+            // setContext("");
+            // setMediaList([]);
+            // setMediaPreview([]);
         })
-    };
-    const handleRemoveMedia = (indexToRemove: number) => {
-        setMediaPreview(prev => prev?.filter((_, i) => i !== indexToRemove) || []);
-        setMediaList(prev => prev?.filter((_, i) => i !== indexToRemove) || []);
     };
     return (
         <div className={styles.header}>
-            <h2>新增文章</h2>
+            <h2>編輯文章</h2>
             <div className={styles.container}>
-                {/* <label className={styles.label}>標題</label> */}
                 <InputBox
                     className={styles.inputBox}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    title="文章標題"
-                    placeholder="早安美資城"
+
                 />
-                {/* <label className={styles.label}>內容</label> */}
                 <textarea
                     className={styles.textarea}
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
-                    placeholder="輸入文章內容"
                 />
 
-                {/* <div className={styles.label}>新增hashtag</div> */}
-
-                {/* <div className={styles.label}>上傳圖片或影片</div> */}
                 <div className={styles.imageList}>
                     {
                         mediaList && mediaPreview?.map((url, index) => <div
@@ -106,13 +100,12 @@ export default function AddArticle() {
 
                 <div className={styles.buttonBox}>
                     <button className={styles.button} onClick={handleSubmit}>
-                        發佈
+                        儲存變更
                     </button>
                 </div>
 
                 {message && <div className={styles.message}>{message}</div>}
             </div>
         </div>
-    );
-
+    )
 }
