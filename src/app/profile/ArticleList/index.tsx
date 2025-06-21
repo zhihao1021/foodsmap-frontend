@@ -79,7 +79,7 @@ export default function ArticleList(props: propsType): ReactNode {
 
                 </div>
             </div>
-            {articles[0] && <ArticleCard data={articles[0]} zoomImage={setZoomImage} />}
+            {articles[0] && <ArticleCard article={articles[0]} zoomImage={setZoomImage} />}
             {articles.map((article) => (
                 <div key={article.id} className={styles.articleHeader}>
                     <div className={styles.authorInfo}>
