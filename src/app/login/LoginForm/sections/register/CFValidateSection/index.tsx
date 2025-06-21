@@ -37,6 +37,8 @@ export default function CFValidateSection(props: propsType): ReactNode {
     }, [windowWidth]);
 
     useEffect(() => {
+        if (currentSection < SectionState.REGISTER_CF_VALIDATE && currentSection !== SectionState.LOADING)
+            setCode(undefined);
         if (currentSection !== SectionState.REGISTER_CF_VALIDATE)
             return;
 
@@ -47,7 +49,7 @@ export default function CFValidateSection(props: propsType): ReactNode {
     }, [currentSection]);
 
     useEffect(() => {
-        if (!email || !code) return;
+        if (email === undefined || code === undefined) return;
         setSection(SectionState.LOADING);
         setErrorMessage("");
 
