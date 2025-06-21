@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useContext, useMemo, useState } from "react";
+import { ChangeEvent, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import styles from "./index.module.scss";
 import { Article } from "@/schemas/article";
@@ -8,6 +8,9 @@ import Image from "next/image";
 import getAvatarSrc from "@/utils/getAvatarSrc";
 import Link from "next/link";
 import getArticleMediaSrc from "@/utils/getArticleMediaSrc";
+import likeArticle from "@/api/article/likeArticle";
+import dislikeArticle from "@/api/article/dislikeArticle";
+import countToString from "@/utils/countToString";
 
 const spliter = new RegExp(/#[^#\s]+/g);
 
@@ -21,14 +24,14 @@ function getTaggedContext(context: string): ReactNode {
 }
 
 type propsType = Readonly<{
-    data: Article,
+    article: Article,
     zoomImage: (src: string) => void
 }>;
 
 export default function ArticleCard(props: propsType): ReactNode {
-    const { data, zoomImage } = props;
+    const { article, zoomImage } = props;
 
-    const [likeCount, setLikeCount] = useState<number>(data.likesCount);
+    const [data, setData] = useState<Article>(article);
 
     const userDataPair = useContext(UserDataContext);
 
@@ -40,6 +43,30 @@ export default function ArticleCard(props: propsType): ReactNode {
 
     const taggedContext = useMemo(() => getTaggedContext(data.context), [data.context]);
 
+    const handleLike = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const checked = event.target.checked;
+
+        if (checked) {
+            likeArticle(data.id).then(() => {
+                setData(prev => ({
+                    ...prev,
+                    likesCount: prev.likesCount + 1,
+                    likedByUser: true
+                }));
+            })
+        }
+        else {
+            dislikeArticle(data.id).then(() => {
+                setData(prev => ({
+                    ...prev,
+                    likesCount: prev.likesCount - 1,
+                    likedByUser: false
+                }));
+            });
+        }
+    }, [data]);
+
+    useEffect(() => setData(data), [article]);
 
     return <div className={styles.articleCard}>
         <div className={styles.authorBox}>
@@ -94,9 +121,10 @@ export default function ArticleCard(props: propsType): ReactNode {
         </div>
         <div className={styles.functionBox}>
             <div className={styles.likeBox}>
-                <label>
-                    <input type="checkbox" />
+                <label className="ms-p">
+                    <input type="checkbox" checked={data.likedByUser} onChange={handleLike} />
                 </label>
+                <div>{countToString(data.likesCount)}</div>
             </div>
         </div>
     </div >
