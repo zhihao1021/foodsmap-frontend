@@ -8,13 +8,8 @@
     background-color: $background;
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
     margin-bottom: 2rem;
-}
-
-.label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
 }
 
 .inputBox {
@@ -108,7 +103,6 @@
     }
 }
 
-
 .buttonBox {
     display: flex;
     justify-content: right;
@@ -121,11 +115,11 @@
         text-align: center;
         font-size: 0.9em;
         border-radius: 0.5rem;
-        transition: color 0.3s, backg
+        transition: color 0.3s, background-color 0.3s;
     }
 
     .button:hover {
-        // background-color: $accent;
+        // background-color: #005dc1;
         color: $background;
         background-color: $primary;
     }

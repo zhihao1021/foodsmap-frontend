@@ -7,6 +7,10 @@ import getUserArticlesById from "@/api/user/getUserArticlesById";
 import getAvatarSrc from "@/utils/getAvatarSrc";
 
 import styles from "./index.module.scss";
+import getArticleMediaSrc from "@/utils/getArticleMediaSrc";
+import Link from "next/link";
+import deleteArticle from "@/api/article/deleteArticle"; // 接下來會做的 API
+
 
 type propsType = Readonly<{
     userId: string
@@ -33,11 +37,6 @@ export default function ArticleList(props: propsType): ReactNode {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const handleEdit = (article: Article) => {
-        alert(`編輯文章：${article.title}`);
-        // 可以導頁或開 modal 編輯
-    };
-
     const handleDelete = (articleId: string) => {
         const confirmDelete = confirm("確定要刪除這篇文章嗎？");
         if (confirmDelete) {
@@ -54,86 +53,84 @@ export default function ArticleList(props: propsType): ReactNode {
         <main className={styles.container}>
             <h1 className={styles.user}>使用者：{userId}</h1>
             {articles.map((article) => (
-                <>
-                    <div key={article.id} className={styles.articleHeader}>
-                        <div className={styles.authorInfo}>
-                            {(
-                                <img src={getAvatarSrc(article.author.id)} alt="avatar" className={styles.avatar} />
-                            )}
-                            <span className={styles.author}>{article.author.displayName}</span>
+                <div key={article.id} className={styles.articleHeader}>
+                    <div className={styles.authorInfo}>
+                        {(
+                            <img src={getAvatarSrc(article.author.id)} alt="avatar" className={styles.avatar} />
+                        )}
+                        <span className={styles.author}>{article.author.displayName}</span>
+                    </div>
+
+
+
+                    <div key={article.id} className={styles.articleCard}>
+                        <button className={`ms-nf ${styles.more}`}
+                            onClick={() => setOpenMenuId(openMenuId === article.id ? null : article.id)}
+
+                        >more_horiz
+                        </button>
+
+                        {openMenuId === article.id && (
+                            <div className={styles.menu} ref={menuRef}>
+                                <Link href={`/edit/${article.id}`}>編輯</Link>
+                                <button onClick={() => handleDelete(article.id)}>刪除</button>
+                            </div>
+                        )}
+
+
+                        <div className={styles.titleBox}>
+                            <h2 className={styles.title}>{article.title}</h2>
+                            <a className={`ms-nf ${styles.googleMapUrl}`}
+                                href={article.googleMapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            // >location_on
+                            >pin_drop
+                            </a>
+                            <div className={styles.createTime}>
+                                {article.createTime && new Date(article.createTime).toLocaleDateString()}
+                            </div>
                         </div>
 
+                        <p className={styles.context}>{article.context}</p>
 
+                        <div className={styles.footer}>
+                            <span className={styles.tags}>
+                                {article.tags.map((tag) => `#${tag} `)}
+                            </span>
+                            <div className={styles.likes}>
+                                <span className="ms-nf">thumb_up</span>
+                                <span>{article.likesCount}</span>
+                            </div>
 
-                        <div key={article.id} className={styles.articleCard}>
-                            <button className={`ms-nf ${styles.more}`}
-                                onClick={() => setOpenMenuId(openMenuId === article.id ? null : article.id)}
-
-                            >more_horiz
-                            </button>
-
-                            {openMenuId === article.id && (
-                                <div className={styles.menu} ref={menuRef}>
-                                    <button onClick={() => handleEdit(article)}> 編輯</button>
-                                    <button onClick={() => handleDelete(article.id)}> 刪除</button>
-                                </div>
-                            )}
-
-
-                            <div className={styles.titleBox}>
-                                <h2 className={styles.title}>{article.title}</h2>
-                                <a className={`ms-nf ${styles.googleMapUrl}`}
+                        </div>
+                        <div className={styles.imageList}>
+                            {
+                                article.mediaList.map(mediaId => (
+                                    <img
+                                        key={mediaId}
+                                        // src={article.mediaURL[index]}
+                                        src={getArticleMediaSrc(article.id, mediaId)}
+                                        alt="article image"
+                                        className={styles.image}
+                                        onClick={() => setZoomImage(getArticleMediaSrc(article.id, mediaId))}
+                                    />
+                                ))
+                            }
+                        </div>
+                        {/* {article.googleMapUrl && (
+                                <a
                                     href={article.googleMapUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                // >location_on
-                                >pin_drop
+                                    className={styles.googleMapUrl}
+                                >
+                                    check Google Map
                                 </a>
-                                <div className={styles.createTime}>
-                                    {article.createTime && new Date(article.createTime).toLocaleDateString()}
-                                </div>
-                            </div>
-
-                            <p className={styles.context}>{article.context}</p>
-
-                            <div className={styles.footer}>
-                                <span className={styles.tags}>
-                                    {article.tags.map((tag) => `#${tag} `)}
-                                </span>
-                                <div className={styles.likes}>
-                                    <span className="ms-nf">thumb_up</span>
-                                    <span>{article.likesCount}</span>
-                                </div>
-
-                            </div>
-                            <div className={styles.imageList}>
-                                {
-                                    // article.mediaUrl.map((url, index) => (
-                                    //     <img
-                                    //         key={index}
-                                    //         // src={article.mediaURL[index]}
-                                    //         src={url}
-                                    //         alt="article image"
-                                    //         className={styles.image}
-                                    //         onClick={() => setZoomImage(url)}
-                                    //     />
-                                    // ))
-                                }
-                            </div>
-                            {/* {article.googleMapUrl && (
-                        <a
-                            href={article.googleMapUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.googleMapUrl}
-                        >
-                            check Google Map
-                        </a>
-                    )} */}
-                        </div>
-                        <hr className={styles.hr} />
+                            )} */}
                     </div>
-                </>
+                    <hr className={styles.hr} />
+                </div>
             ))}
 
             {zoomImage && (
