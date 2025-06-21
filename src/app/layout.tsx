@@ -48,7 +48,9 @@ export default async function RootLayout({
     const headerList = await headers();
     const isMobile = checkIsMobile(headerList.get("user-agent") || "");
 
-    const userData = await getCurrentUserDataCache();
+    let userData = null;
+    try { await getCurrentUserDataCache(); }
+    catch { }
 
     return (
         <html lang="en">
