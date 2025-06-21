@@ -11,6 +11,7 @@ type Article = Readonly<{
     mediaList: string[],
     googleMapUrl: string,
     likesCount: number,
+    likedByUser: boolean,
 }>;
 
 type ArticleCreate = {
