@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { Noto_Sans_TC } from "next/font/google";
+import { headers } from "next/headers";
+import { Suspense } from "react";
+
+import getCurrentUserDataCache from "@/cache/user/getCurrentUserData";
 
 import SWRegister from "@/components/SWRegister";
 import AutoRefresh from "@/components/AutoRefresh";
+import NavigateBar from "@/components/NavigateBar";
+
+import checkIsMobile from "@/utils/detectmobilebrowser";
 
 import "./globals.scss";
-import NavigateBar from "@/components/NavigateBar";
-import { Suspense } from "react";
-import { headers } from "next/headers";
-import checkIsMobile from "@/utils/detectmobilebrowser";
+import UserDataContextProvider from "@/context/userDataContext";
 
 const notoSansTC = Noto_Sans_TC({
     variable: "--font-noto-sans-tc",
@@ -44,12 +48,16 @@ export default async function RootLayout({
     const headerList = await headers();
     const isMobile = checkIsMobile(headerList.get("user-agent") || "");
 
+    let userData = null;
+    try { await getCurrentUserDataCache(); }
+    catch { }
+
     return (
         <html lang="en">
             <body className={`${notoSansTC.className}`}>
-                <Suspense>
+                <UserDataContextProvider userData={userData}>
                     {children}
-                </Suspense>
+                </UserDataContextProvider>
                 <NavigateBar isMobile={isMobile} />
                 <SWRegister />
                 <AutoRefresh />

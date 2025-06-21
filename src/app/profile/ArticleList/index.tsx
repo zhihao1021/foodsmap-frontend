@@ -1,11 +1,12 @@
 "use client";
-
-import { useParams } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import styles from "./index.module.scss";
+
 import type { Article } from "@/schemas/article";
+
 import getUserArticlesById from "@/api/user/getUserArticlesById";
 import getAvatarSrc from "@/utils/getAvatarSrc";
+
+import styles from "./index.module.scss";
 
 type propsType = Readonly<{
     userId: string
@@ -16,14 +17,9 @@ export default function ArticleList(props: propsType): ReactNode {
         userId
     } = props;
 
-    // const { id: userId} = 
-    // const userId = "123";
-
     const [articles, setArticles] = useState<Article[]>([]);
     useEffect(() => {
-        if (typeof userId === "string") {
-            getUserArticlesById().then(v => setArticles(v.data));
-        }
+        getUserArticlesById(userId).then(v => setArticles(v.data));
     }, [userId]);
 
 

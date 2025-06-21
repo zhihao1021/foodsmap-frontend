@@ -1,30 +1,19 @@
-"use client";
+"use server";
+import { redirect } from "next/navigation";
+import { ReactNode } from "react";
 
-import { ReactNode, useEffect, useState } from "react";
-import styles from "./page.module.scss";
-import type { Article } from "@/schemas/article";
-import getUserArticlesById from "@/api/user/getUserArticlesById";
-import getArticleMediaSrc from "@/utils/getArticleMediaSrc";
+import getCurrentUserDataCache from "@/cache/user/getCurrentUserData";
+
 import ArticleList from "./ArticleList";
 
 
-export default function UserPage(): ReactNode {
-    // const {
-    //     userId
-    // } = useParams();
+export default async function Profile(): Promise<ReactNode> {
+    try {
+        const { id } = await getCurrentUserDataCache();
 
-    // const { id: userId} = 
-    const userId = "123";
-
-    const [articles, setArticles] = useState<Article[]>([]);
-    useEffect(() => {
-        if (typeof userId === "string") {
-            getUserArticlesById().then(v =>setArticles(v.data));
-        }
-    }, [userId]);
-    const [zoomImage, setZoomImage] = useState<string | null>(null);
-
-    return <>
-        <ArticleList userId={userId} />
-    </>
+        return <ArticleList userId={id} />
+    }
+    catch {
+        redirect("/login");
+    }
 }
