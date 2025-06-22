@@ -1,4 +1,3 @@
-// src/api/article/byTag.ts
 import request from "@/config/axios";
 
 import { Article } from "@/schemas/article";

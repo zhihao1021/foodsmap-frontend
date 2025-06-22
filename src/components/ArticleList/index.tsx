@@ -5,20 +5,26 @@ import { Article } from "@/schemas/article";
 
 import deleteArticle from "@/api/article/deleteArticle";
 
-import ArticleCard from "../ArticleCard";
+import ArticleCard from "@/components/ArticleCard";
+import LoadingDots from "@/components/LoadingDots";
+
+import updateArticleDataAction from "@/actions/updateArticleDataAction";
+import updateLatestArticleAction from "@/actions/updateLatestArticleAction";
 
 import styles from "./index.module.scss";
-import updateArticleDataAction from "@/actions/updateArticleDataAction";
-import LoadingDots from "../LoadingDots";
 
 type propsType = Readonly<{
-    articles: Article[]
+    articles?: Article[],
+    deleteCallback?: (articleId: string) => void
 }>;
 
 export default function ArticleList(props: propsType): ReactNode {
-    const { articles } = props;
+    const {
+        articles,
+        deleteCallback
+    } = props;
 
-    const [articleList, setArticleList] = useState<Article[]>(articles);
+    const [articleList, setArticleList] = useState<Article[] | undefined>(articles);
     const [showImage, setShowImage] = useState<boolean>(false);
     const [imageSrc, setImageSrc] = useState<string>("");
     const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false);
@@ -28,21 +34,27 @@ export default function ArticleList(props: propsType): ReactNode {
 
     const handleDelete = useCallback(() => {
         setDeleteDialogSection(1);
-        deleteArticle(deleteArticleId).then(
-            () => updateArticleDataAction(deleteArticleId)
-        ).then(async () => {
+        deleteArticle(deleteArticleId).then(async () => {
+            await updateArticleDataAction(deleteArticleId)
+            await updateLatestArticleAction();
+        }).then(async () => {
             await setDeleteSuccess(true);
-            setArticleList(prev => prev.filter(article => article.id !== deleteArticleId));
+            setArticleList(prev => prev ? prev.filter(article => article.id !== deleteArticleId) : prev);
+            deleteCallback?.(deleteArticleId);
         }).catch(
             () => setDeleteSuccess(false)
         ).finally(
             () => setDeleteDialogSection(2)
         );
-    }, [deleteArticleId]);
+    }, [deleteArticleId, deleteCallback]);
 
     useEffect(() => {
         if (showDeleteDialog) setDeleteDialogSection(0);
     }, [showDeleteDialog])
+
+    useEffect(() => {
+        setArticleList(articles)
+    }, [articles]);
 
     return <>
         <div className={styles.zoomImage} data-show={showImage} onClick={event => {
@@ -81,8 +93,9 @@ export default function ArticleList(props: propsType): ReactNode {
             </div>
         </div >
         <div className={styles.articleList}>
-            {
-                articleList.map((data, index) => <Fragment key={data.id}>
+            <LoadingDots className={styles.loadingDots} show={articleList === undefined} />
+            {articleList && <>
+                {articleList.map((data, index) => <Fragment key={data.id}>
                     {index !== 0 && <hr />}
                     <ArticleCard
                         article={data}
@@ -95,11 +108,11 @@ export default function ArticleList(props: propsType): ReactNode {
                             setShowDeleteDialog(true);
                         }}
                     />
-                </Fragment>)
-            }
-            <div className={styles.bottom}>
-                <div>已經到底了~</div>
-            </div>
-        </div>
+                </Fragment>)}
+                < div className={styles.bottom}>
+                    <div>已經到底了~</div>
+                </div>
+            </>}
+        </div >
     </>
 }

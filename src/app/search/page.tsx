@@ -8,7 +8,7 @@ import AuthorCard from './components/AuthorCard';
 import styles from './page.module.scss';
 import type { Article } from '@/schemas/article';
 import type { User } from '@/schemas/user';
-import getUserByAuthor from '@/api/article/gteByAuthor';
+import getUserByAuthor from '@/api/user/getUsersByDisplayName';
 import getArticlesByContext from '@/api/article/getByContext';
 import getArticlesByTag from '@/api/article/getByTag';
 import PopularTag from '@/api/search/popularTag';

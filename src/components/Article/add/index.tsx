@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.scss";
 import InputBox from "@/components/InputBox";
 import createNewArticle from "@/api/article/createNewArticle";
+import updateLatestArticleAction from "@/actions/updateLatestArticleAction";
 
 export default function AddArticle() {
     const [title, setTitle] = useState<string>("");
@@ -44,7 +45,7 @@ export default function AddArticle() {
             title: title,
             context: context,
             googleMapUrl: googleMapUrl,
-        }, mediaList).then(() => {
+        }, mediaList).then(() => updateLatestArticleAction()).then(() => {
             setMessage("文章新增成功！");
             setTitle("");
             setContext("");

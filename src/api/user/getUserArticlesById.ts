@@ -1,7 +1,6 @@
 import request from "@/config/axios";
 
 import { Article } from "@/schemas/article";
-import { jwtDecode } from "jwt-decode";
 
 export default async function getUserArticlesById(userId: string, token?: string, limit?: number): Promise<ListResponse<Article>> {
     const urlParams = new URLSearchParams();

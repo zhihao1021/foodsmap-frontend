@@ -1,18 +1,17 @@
 "use client";
-import { redirect } from "next/navigation";
+import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
 
-import getCurrentUserDataCache from "@/cache/user/getCurrentUserData";
-import ArticleList from "@/components/ArticleList";
-import getUserArticlesById from "@/api/user/getUserArticlesById";
-
-import styles from "./index.module.scss"
-import Image from "next/image";
-import getAvatarSrc from "@/utils/getAvatarSrc";
 import { GlobalUser } from "@/schemas/user";
 import { Article } from "@/schemas/article";
-import LoadingStrip from "@/components/LoadingStrip";
-import LoadingDots from "../LoadingDots";
+
+import getUserArticlesById from "@/api/user/getUserArticlesById";
+
+import ArticleList from "@/components/ArticleList";
+
+import getAvatarSrc from "@/utils/getAvatarSrc";
+
+import styles from "./index.module.scss"
 
 type propsType = Readonly<{
     userData: GlobalUser
@@ -39,9 +38,9 @@ export default function Profile(props: propsType): ReactNode {
             <h1 className={styles.displayName}>{displayName} 的主頁</h1>
             <h2 className={styles.username}>@{username}</h2>
         </div>
-        <LoadingDots show={articles === undefined} />
-        {
-            articles !== undefined && <ArticleList articles={articles} />
-        }
+        <ArticleList
+            articles={articles}
+            deleteCallback={articleId => setArticles(prev => prev ? prev.filter(article => article.id !== articleId) : prev)}
+        />
     </div>
 }

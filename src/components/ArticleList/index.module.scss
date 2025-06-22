@@ -143,6 +143,18 @@
 }
 
 .articleList {
+    position: relative;
+    min-height: 12rem;
+
+    .loadingDots {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 12rem;
+        width: 100%;
+        margin: auto;
+    }
+
     hr {
         background-color: #b0b0b0;
         border: none;
