@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import type { Article } from "@/schemas/article";
 
@@ -11,6 +11,7 @@ import getArticleMediaSrc from "@/utils/getArticleMediaSrc";
 import Link from "next/link";
 import deleteArticle from "@/api/article/deleteArticle"; // 接下來會做的 API
 import ArticleCard from "@/components/ArticleCard";
+import { UserDataContext } from "@/context/userDataContext";
 
 
 type propsType = Readonly<{
@@ -21,6 +22,24 @@ export default function ArticleList(props: propsType): ReactNode {
     const {
         userId
     } = props;
+
+    const data = useContext(UserDataContext);
+
+    const {
+        displayName,
+        username
+    } = useMemo(() => {
+        if (data?.data) {
+            return data.data;
+        }
+
+        return {
+            displayName: "",
+            username: ""
+        };
+    }, [data]);
+
+    const avatarSrc = useMemo(() => getAvatarSrc(userId), [userId]);
 
     const [articles, setArticles] = useState<Article[]>([]);
     useEffect(() => {
@@ -52,7 +71,14 @@ export default function ArticleList(props: propsType): ReactNode {
     const menuRef = useRef<HTMLDivElement | null>(null);
     return (
         <main className={styles.container}>
-            <h1 className={styles.user}>使用者：{userId}</h1>
+            <div className={styles.profileBox}>
+                <img src={avatarSrc} alt="avatar" className={styles.avatarLarge} />
+                <div className={styles.userInfo}>
+                    <div className={styles.displayName}>{displayName}</div>
+                    <div className={styles.username}>@{username}</div>
+
+                </div>
+            </div>
             {articles[0] && <ArticleCard article={articles[0]} zoomImage={setZoomImage} />}
             {articles.map((article) => (
                 <div key={article.id} className={styles.articleHeader}>
