@@ -58,13 +58,14 @@ export default function SearchPage() {
       setAuthor(result_user);
       console.log('作者搜尋結果:', result_user);
       
-      const tags_article = (await getArticlesByTag(input)).data;
-      setTagArticles(tags_article);
-      console.log('Tags搜尋結果:', tags_article);
-      
+
       const recommended_article = (await getArticlesByContext(input)).data;
       setRecommendedArticles(recommended_article);
       console.log('Context搜尋結果:', recommended_article);
+
+      const tags_article = (await getArticlesByTag(input)).data;
+      setTagArticles(tags_article);
+      console.log('Tags搜尋結果:', tags_article);
       
 
     } catch (err) {
