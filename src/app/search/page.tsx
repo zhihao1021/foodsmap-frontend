@@ -3,7 +3,6 @@ import { useRef, useState, useEffect } from 'react';
 import SearchForm, { SearchFormRef } from './components/SearchForm';
 import SuggestionButtons from './components/SuggestionButtons';
 import CategorySelector from './components/CategorySelector';
-import ArticleCard from './components/ArticleCard';
 import AuthorCard from './components/AuthorCard';
 import styles from './page.module.scss';
 import type { Article } from '@/schemas/article';
