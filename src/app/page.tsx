@@ -22,14 +22,14 @@ export default function HostPage(){
                 console.error('載入最新文章失敗:', err);
                 setError('無法載入最新文章');
             }
-        };
+        };  
         
         loadLatestArticle();
       
     }, []);
     
     return (
-    <div className={styles.container}>
+    <div className={styles.mainPage}>
         <h1>最新文章</h1>
         {
             article && <ArticleList articles={article} />
