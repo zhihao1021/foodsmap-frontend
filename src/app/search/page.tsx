@@ -5,6 +5,7 @@ import SuggestionButtons from './components/SuggestionButtons';
 import CategorySelector from './components/CategorySelector';
 import ArticleCard from './components/ArticleCard';
 import AuthorCard from './components/AuthorCard';
+import styles from './page.module.scss';
 import type { Article } from '@/schemas/article';
 import type { User } from '@/schemas/user';
 import getUserByAuthor from '@/api/article/gteByAuthor';
@@ -133,7 +134,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className={styles.container}>
       <SearchForm onSubmit={handleSubmit} ref={searchRef} onClear={handleClear} />
       {showSuggestions && (
         <SuggestionButtons suggestions={suggestionsTags} onSuggestionClick={handleSuggestionClick} />

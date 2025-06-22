@@ -10,7 +10,7 @@ export default async function getUserByAuthor(displayName: string, token?: strin
     if (token) urlParams.append("token", token);
     if (limit !== undefined) urlParams.append("limit", limit.toString())
 
-    const response = await request.get<ListResponse<User>>(`/article/by-author/${displayName}?${urlParams}`);
+    const response = await request.get<ListResponse<User>>(`/user/by-displayName/${displayName}?${urlParams}`);
 
     return response.data;
 }
