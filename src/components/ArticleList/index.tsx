@@ -5,11 +5,11 @@ import { Article } from "@/schemas/article";
 
 import deleteArticle from "@/api/article/deleteArticle";
 
-import updateArticleById from "@/actions/updateArticleByIdAction";
-
 import ArticleCard from "../ArticleCard";
 
 import styles from "./index.module.scss";
+import updateArticleDataAction from "@/actions/updateArticleDataAction";
+import LoadingDots from "../LoadingDots";
 
 type propsType = Readonly<{
     articles: Article[]
@@ -29,7 +29,7 @@ export default function ArticleList(props: propsType): ReactNode {
     const handleDelete = useCallback(() => {
         setDeleteDialogSection(1);
         deleteArticle(deleteArticleId).then(
-            () => updateArticleById(deleteArticleId)
+            () => updateArticleDataAction(deleteArticleId)
         ).then(async () => {
             await setDeleteSuccess(true);
             setArticleList(prev => prev.filter(article => article.id !== deleteArticleId));
@@ -69,9 +69,7 @@ export default function ArticleList(props: propsType): ReactNode {
                     </div>
                 </div>
                 <div className={styles.section} data-show={deleteDialogSection < 1 ? "R" : deleteDialogSection > 1 ? "L" : "C"}>
-                    <div className={styles.loading}>
-                        {Array.from({ length: 3 }).map((_, index) => <div key={index} />)}
-                    </div>
+                    <LoadingDots className={styles.loadingDots} />
                 </div>
                 <div className={styles.section} data-show={deleteDialogSection < 2 ? "R" : "C"}>
                     <div className={`${styles.icon} ms-nf`}>{deleteSuccess ? "done_all" : "error"}</div>
@@ -99,6 +97,9 @@ export default function ArticleList(props: propsType): ReactNode {
                     />
                 </Fragment>)
             }
+            <div className={styles.bottom}>
+                <div>已經到底了~</div>
+            </div>
         </div>
     </>
 }

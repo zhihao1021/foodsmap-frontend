@@ -5,11 +5,12 @@ import getLatestArticle from '@/api/article/getLatestArticle';
 import styles from './page.module.scss';
 import { useRef, useState, useEffect } from 'react';
 import { Article } from '@/schemas/article';
+import ArticleList from '@/components/ArticleList';
 
 
 export default function HostPage(){
     const [showArticleCard, setShowArticleCard] = useState(false);
-    const [article, setarticle] = useState<Article[]>([]);
+    const [article, setarticle] = useState<Article[]>();
     const [error, setError] = useState<string | null>(null);
 
     useEffect( () => {
@@ -30,9 +31,9 @@ export default function HostPage(){
     return (
     <div className={styles.container}>
         <h1>最新文章</h1>
-        {article.map(article => (
-            <ArticleCard key={article.id} article={article} />
-        ))}
+        {
+            article && <ArticleList articles={article} />
+        }
     </div>
   );
 }

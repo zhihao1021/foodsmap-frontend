@@ -6,18 +6,16 @@ import getCurrentUserDataCache from "@/cache/user/getCurrentUserData";
 import ArticleList from "@/components/ArticleList";
 import getUserArticlesById from "@/api/user/getUserArticlesById";
 
-// import ArticleList from "./ArticleList";
+import styles from "./index.module.scss"
+import Image from "next/image";
+import getAvatarSrc from "@/utils/getAvatarSrc";
+import Profile from "@/components/Profile";
 
-import styles from "./page.module.scss"
-
-export default async function Profile(): Promise<ReactNode> {
+export default async function SelfProfilePage(): Promise<ReactNode> {
     try {
-        const { id } = await getCurrentUserDataCache();
-        const articles = await getUserArticlesById(id);
+        const userData = await getCurrentUserDataCache();
 
-        return <div className={styles.profile}>
-            <ArticleList articles={articles.data} />
-        </div>
+        return <Profile userData={userData} />
     }
     catch {
         redirect("/login");
