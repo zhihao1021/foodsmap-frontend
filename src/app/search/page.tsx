@@ -12,6 +12,7 @@ import getUserByAuthor from '@/api/user/getUsersByDisplayName';
 import getArticlesByContext from '@/api/article/getByContext';
 import getArticlesByTag from '@/api/article/getByTag';
 import PopularTag from '@/api/search/popularTag';
+import ArticleList from '@/components/ArticleList';
 
 
 export default function SearchPage() {
@@ -57,7 +58,7 @@ export default function SearchPage() {
       const result_user = (await getUserByAuthor(input)).data;
       setAuthor(result_user);
       console.log('作者搜尋結果:', result_user);
-      
+
 
       const recommended_article = (await getArticlesByContext(input)).data;
       setRecommendedArticles(recommended_article);
@@ -66,17 +67,17 @@ export default function SearchPage() {
       const tags_article = (await getArticlesByTag(input)).data;
       setTagArticles(tags_article);
       console.log('Tags搜尋結果:', tags_article);
-      
+
 
     } catch (err) {
       setError((err as Error).message ?? '搜尋失敗');
     } finally {
       setLoading(false);
     }
-};
+  };
 
 
-  const handleClear = async() => {
+  const handleClear = async () => {
     setShowSuggestions(true);
     setShowCategorySelector(false);
     setShowArticleCard(false);
@@ -104,25 +105,21 @@ export default function SearchPage() {
     switch (selectedCategory) {
       case '推薦':
         return (
-          <>
-            {recommendedArticles.map(article => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </>
+          <ArticleList
+            articles={recommendedArticles}
+            deleteCallback={articleId => setRecommendedArticles(prev => prev.filter(v => v.id !== articleId))}
+          />
         );
       case 'Tags':
-        return (
-          <>
-            {tagArticles.map(article => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </>
-        );
+        return <ArticleList
+            articles={tagArticles}
+            deleteCallback={articleId => setRecommendedArticles(prev => prev.filter(v => v.id !== articleId))}
+          />;
       case '作者':
         return (
           <>
             {author.map(user => (
-              <AuthorCard key={user.id} user={user} /> 
+              <AuthorCard key={user.id} user={user} />
             ))}
           </>
         );
