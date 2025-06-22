@@ -126,7 +126,7 @@ export default function ArticleCard(props: propsType): ReactNode {
                 <button className={`ms ${styles.icon}`} onClick={() => setOpenToolBox(v => !v)}>more_horiz</button>
                 <div className={styles.toolMenuMask}>
                     <div className={styles.toolMenu}>
-                        <Link href={"./edit-article"} className={styles.option}>
+                        <Link href={`/edit-article/${data.id}`} className={styles.option}>
                             <span className={`ms ${styles.icon}`}>edit</span>
                             <span>編輯</span>
                         </Link>
