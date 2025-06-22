@@ -7,6 +7,7 @@ import InputBox from "@/components/InputBox";
 import updateArticle from "@/api/article/updateArticle";
 import { useRouter } from "next/navigation";
 import { profile } from "node:console";
+import updateArticleDataAction from "@/actions/updateArticleDataAction";
 
 
 export default function EditArticle({ article }: { article: Article }) {
@@ -44,7 +45,7 @@ export default function EditArticle({ article }: { article: Article }) {
             title: title,
             context: context,
             googleMapUrl: googleMapUrl,
-        }).then(() => {
+        }).then(() => updateArticleDataAction(article.id)).then(() => {
             setMessage("文章編輯成功！");
             router.push(`/profile`); // 返回文章頁面
             //返回個人頁面

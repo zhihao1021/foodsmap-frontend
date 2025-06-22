@@ -38,6 +38,7 @@ export default function AddArticle() {
         }
         console.log("Title:", title);
         console.log("Content:", context);
+        console.log("Google Map URL:", googleMapUrl);
 
         createNewArticle({
             title: title,
