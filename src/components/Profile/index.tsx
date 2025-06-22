@@ -21,7 +21,7 @@ export default function Profile(props: propsType): ReactNode {
     const { id, username, displayName } = props.userData;
 
     const [articles, setArticles] = useState<Article[]>();
-    const [nextToken, setNextToken] = useState<string | null>(null);
+    const [, setNextToken] = useState<string | null>(null);
 
     useEffect(() => {
         getUserArticlesById(id).then(data => {

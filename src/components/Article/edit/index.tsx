@@ -6,7 +6,6 @@ import styles from "./index.module.scss";
 import InputBox from "@/components/InputBox";
 import updateArticle from "@/api/article/updateArticle";
 import { useRouter } from "next/navigation";
-import { profile } from "node:console";
 import updateArticleDataAction from "@/actions/updateArticleDataAction";
 import updateLatestArticleAction from "@/actions/updateLatestArticleAction";
 

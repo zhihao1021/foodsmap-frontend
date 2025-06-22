@@ -16,23 +16,23 @@ import PopularTag from '@/api/search/popularTag';
 
 export default function SearchPage() {
   const searchRef = useRef<SearchFormRef>(null);
-  const [searchText, setSearchText] = useState('');
+  const [, setSearchText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('推薦');
   const [showCategorySelector, setShowCategorySelector] = useState(false);
   const [showArticleCard, setShowArticleCard] = useState(false);
-  const [showAuthorCard, setShowAuthorCard] = useState(false);
+  const [, setShowAuthorCard] = useState(false);
   const [recommendedArticles, setRecommendedArticles] = useState<Article[]>([]);
   const [tagArticles, setTagArticles] = useState<Article[]>([]);
   const [author, setAuthor] = useState<User[]>([]);
   const [suggestionsTags, setSuggestionsTags] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [, setLoading] = useState(false);
+  const [, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadPopularTags = async () => {
       try {
-        const tags = await PopularTag(20);
+        const tags = await PopularTag();
         setSuggestionsTags(tags);
       } catch (err) {
         console.error('載入熱門標籤失敗:', err);
@@ -54,18 +54,15 @@ export default function SearchPage() {
     setError(null);
 
     try {
-      let tags_article: Article[];
-      let recommended_article: Article[];
-      let result_user: User[];
-      result_user = (await getUserByAuthor(input)).data;
+      const result_user = (await getUserByAuthor(input)).data;
       setAuthor(result_user);
       console.log('作者搜尋結果:', result_user);
-
-      tags_article = (await getArticlesByTag(input)).data;
+      
+      const tags_article = (await getArticlesByTag(input)).data;
       setTagArticles(tags_article);
       console.log('Tags搜尋結果:', tags_article);
-
-      recommended_article = (await getArticlesByContext(input)).data;
+      
+      const recommended_article = (await getArticlesByContext(input)).data;
       setRecommendedArticles(recommended_article);
       console.log('Context搜尋結果:', recommended_article);
       
@@ -89,7 +86,7 @@ export default function SearchPage() {
     setRecommendedArticles([]);
 
     try {
-      const tags = await PopularTag(20);
+      const tags = await PopularTag();
       setSuggestionsTags(tags);
     } catch (err) {
       console.error('重新載入標籤失敗:', err);

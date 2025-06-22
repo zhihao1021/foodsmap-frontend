@@ -1,16 +1,19 @@
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import { useState, useImperativeHandle, ReactNode, Ref } from 'react';
 import styles from './index.module.scss';
 
 export interface SearchFormRef {
   setSearchTerm: (value: string) => void;
 }
 
-interface SearchFormProps {
+export default function SearchForm({
+  onSubmit,
+  onClear,
+  ref,
+}: {
   onSubmit: (value: string) => void;
   onClear: () => void;
-}
-
-const SearchForm = forwardRef<SearchFormRef, SearchFormProps>(({ onSubmit, onClear }, ref) => {
+  ref: Ref<SearchFormRef>;
+}): ReactNode {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +55,4 @@ const SearchForm = forwardRef<SearchFormRef, SearchFormProps>(({ onSubmit, onCle
       </button>
     </div>
   );
-});
-
-export default SearchForm;
+}

@@ -1,4 +1,5 @@
 import request from "@/config/axios";
+import ListResponse from "@/lib/listResponse";
 
 import { Article } from "@/schemas/article";
 
