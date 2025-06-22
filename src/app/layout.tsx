@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_TC } from "next/font/google";
 import { headers } from "next/headers";
-import { Suspense } from "react";
 
 import getCurrentUserDataCache from "@/cache/user/getCurrentUserData";
 

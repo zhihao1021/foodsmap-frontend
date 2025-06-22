@@ -28,10 +28,10 @@ const navigateList = [
         icon: "add",
     },
     {
-        name: "Notification",
-        displayName: "通知",
-        href: "/notification",
-        icon: "notifications",
+        name: "Settings",
+        displayName: "設定",
+        href: "/settings",
+        icon: "settings",
     },
     {
         name: "Profile",

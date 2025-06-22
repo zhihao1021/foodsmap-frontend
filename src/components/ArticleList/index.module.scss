@@ -1,0 +1,195 @@
+.zoomImage,
+.deleteDialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: $mask-background;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+
+    &[data-show=true] {
+        opacity: 1;
+        pointer-events: initial;
+    }
+}
+
+.zoomImage {
+    .imageBox {
+        position: relative;
+        max-width: min(96rem, 95vw);
+        max-height: min(64rem, 80vh);
+        overflow: hidden;
+        border-radius: 1rem;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+}
+
+.deleteDialog {
+    .box {
+        position: relative;
+        width: min(18rem, 95vw);
+        box-sizing: border-box;
+        color: $box-context;
+        background-color: $box-background;
+        border-radius: 1rem;
+        height: 12rem;
+        overflow: hidden;
+
+        .section {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: left 0.3s;
+            box-sizing: border-box;
+            gap: 1rem;
+
+            &[data-show="L"] {
+                left: -100%;
+            }
+
+            &[data-show="C"] {
+                left: 0;
+            }
+
+            &[data-show="R"] {
+                left: 100%;
+            }
+
+            .title {
+                font-size: 1.5rem;
+                text-align: center;
+                margin: auto 0;
+            }
+
+            .icon {
+                font-size: 2.5rem;
+            }
+
+            .info {
+                font-size: 1.5rem;
+
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                justify-content: flex-end;
+                gap: 0.5rem;
+
+                button {
+                    width: 4rem;
+                    height: 2rem;
+                    border-radius: 0.5rem;
+                    border: 1px solid;
+                    transition: background-color 0.3s;
+
+                    &.cancel {
+                        color: $box-context;
+                        border-color: $box-context;
+
+                        &:hover {
+                            color: $box-background;
+                            background-color: $box-context;
+                        }
+                    }
+
+                    &.delete {
+                        color: $input-error;
+                        border-color: $input-error;
+
+                        &:hover {
+                            color: $box-background;
+                            background-color: $input-error;
+                        }
+                    }
+
+                    &.confirm {
+                        color: $secondary;
+                        border-color: $secondary;
+
+                        &:hover {
+                            color: $box-background;
+                            background-color: $secondary;
+                        }
+                    }
+                }
+            }
+
+            .loading {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+
+                >div {
+                    height: 0.8rem;
+                    width: 0.8rem;
+                    border-radius: 0.4rem;
+                    background-color: $disabled;
+                    animation: loading 1s infinite;
+
+                    &:nth-child(1) {
+                        animation-delay: 0s;
+                    }
+
+                    &:nth-child(2) {
+                        animation-delay: 0.1s;
+                    }
+
+                    &:nth-child(3) {
+                        animation-delay: 0.2s;
+                    }
+
+                    @keyframes loading {
+                        0% {
+                            transform: translateY(0)
+                        }
+
+                        20% {
+                            transform: translateY(-0.8rem)
+                        }
+
+                        50% {
+                            transform: translateY(0)
+                        }
+
+                        100% {
+                            transform: translateY(0)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.articleList {
+
+    hr {
+        background-color: #b0b0b0;
+        border: none;
+        width: 100%;
+        height: 1px;
+        margin: 2rem 0;
+    }
+}

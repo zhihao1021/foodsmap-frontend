@@ -1,5 +1,6 @@
 .articleCard {
     width: 100%;
+    isolation: isolate;
 
     .authorBox {
         display: flex;
@@ -21,10 +22,12 @@
         }
 
         .nameBox {
+            flex: 1;
+            max-width: fit-content;
             display: block;
             height: fit-content;
             overflow-x: hidden;
-            max-width: calc(100% - 5rem);
+            margin-right: auto;
 
             >* {
                 text-wrap: nowrap;
@@ -34,12 +37,110 @@
             }
 
             .displayName {
-                color: $accent;
+                color: $secondary;
             }
 
             .username {
                 color: $disabled;
                 font-size: 0.65em;
+            }
+        }
+
+        .datetime {
+            position: relative;
+            font-size: 0.95rem;
+            color: $disabled;
+            cursor: pointer;
+
+            .detail {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.15rem;
+                width: 12rem;
+                box-shadow: 0 0 0.25rem 0.05rem #8888;
+                border-radius: 0.25rem;
+                padding: 0.5rem;
+                top: calc(100% + 0.5rem);
+                left: calc(50% - 6rem - min(max(0px, 4rem - 4vw), 6rem));
+                transition: opacity 0.3s;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 5;
+                background-color: $menu-background;
+            }
+
+            &:hover .detail {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        .toolBox {
+            position: relative;
+
+            &[data-open=true] .toolMenuMask {
+                height: 6rem;
+            }
+
+            .icon {
+                font-size: 1.5rem;
+                font-weight: bold;
+                cursor: pointer;
+                padding-top: 0.25em;
+            }
+
+            .toolMenuMask {
+                position: absolute;
+                height: 0;
+                width: 6rem;
+                top: 100%;
+                left: calc(50% - 3rem);
+                left: calc(50% - 3rem - min(max(0px, 2rem - 2vw), 3rem));
+                z-index: 10;
+                transition: height 0.3s;
+                overflow: hidden;
+
+                .toolMenu {
+                    padding: 0.75rem 0;
+                    border-radius: 0.5rem;
+                    background-color: $menu-background;
+
+                    .option {
+                        display: flex;
+                        box-sizing: border-box;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5rem;
+                        width: 100%;
+                        height: 2.25rem;
+                        line-height: 2.25rem;
+                        padding-bottom: 0.05em;
+                        user-select: none;
+                        cursor: pointer;
+                        transition: color 0.15s, background-color 0.15s;
+
+                        .icon {
+                            font-size: 0.9em;
+                        }
+
+                        &:hover {
+                            color: $menu-background;
+                            background-color: $context;
+                        }
+
+                        &.delete {
+                            color: $input-error;
+                        }
+
+                        &.delete:hover {
+                            color: $context;
+                            background-color: $input-error;
+                        }
+                    }
+
+                }
             }
         }
     }
@@ -55,20 +156,23 @@
         .titleBox {
             display: flex;
             align-items: center;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             margin: 0.25rem 0;
             gap: 0.5rem;
 
             h3 {
                 margin: 0;
+                text-overflow: ellipsis;
+                word-break: break-all;
                 color: $primary;
             }
 
-            a {
+            .pin {
                 padding-top: 0.25em;
                 font-size: 0.9em;
                 color: #80aefd;
                 transition: filter 0.3s;
+                margin-right: auto;
 
                 &:hover {
                     filter: brightness(0.75);
@@ -116,6 +220,28 @@
                         object-position: center;
                     }
                 }
+            }
+        }
+    }
+
+    .functionBox {
+        display: flex;
+        align-items: center;
+
+        .likeBox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            label {
+                position: relative;
+                height: 1.5rem;
+                width: 1.5rem;
+                line-height: 1.5rem;
+                font-size: 1.25rem;
+                display: block;
+
+                @include fill-switch-icon("thumb_up")
             }
         }
     }

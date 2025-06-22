@@ -5,12 +5,14 @@
         // --color-accent: #c64601;
         --color-primary: #d1e3ff; //可以調整 暗色主題的主色調
         --color-secondary: #4e86e8; //可以調整 暗色主題的主色調
-        --color-accent: #1d63dc;
+        --color-accent: #1ddca9;
 
         --color-context: #f4ece7;
         --color-background: #070403;
 
         --color-hover-background: #333333AA;
+
+        --color-menu-background: #181818;
 
         --scrollbar-background: #333333;
         --scrollbar-background-hover: #555555;
@@ -24,8 +26,10 @@ $background: var(--color-background, #fcf9f8);
 // $accent: var(--color-accent, #fe7e39);
 $primary: var(--color-primary, #8397b3); //可以調整 亮色主題的主色調
 $secondary: var(--color-secondary, #4e86e8); //可以調整 亮色主題的主色調
-$accent: var(--color-accent, #1d63dc);
+$accent: var(--color-accent, #37ba97);
 $hover-background: var(--color-hover-background, #88888866);
+
+$menu-background: var(--color-menu-background, #e6e2df);
 
 $scrollbar-background: var(--scrollbar-background, #CCCCCC);
 $scrollbar-background-hover: var(--scrollbar-background-hover, #AAAAAA);
@@ -48,6 +52,8 @@ $accept: #4CAF50;
 $input-error: #E24343;
 $progress-background: #DDD;
 $progress-bar: #999;
+
+$mask-background: #22222288;
 
 // --text: #18100b;
 // --background: #fcf9f8;
