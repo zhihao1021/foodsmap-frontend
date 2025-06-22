@@ -63,9 +63,9 @@ export default function ArticleList(props: propsType): ReactNode {
                 setShowImage(false);
             }
         }} >
-            <div className={styles.imageBox}>
-                {imageSrc && <img alt="zoom image" src={imageSrc} />}
-            </div>
+            {imageSrc && <img alt="zoom image" src={imageSrc} />}
+            {/* <div className={styles.imageBox}>
+            </div> */}
         </div>
         <div className={styles.deleteDialog} data-show={showDeleteDialog} onClick={event => {
             const target = event.target as HTMLElement;

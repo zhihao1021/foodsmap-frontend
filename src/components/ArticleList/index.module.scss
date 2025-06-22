@@ -7,7 +7,6 @@
     width: 100vw;
     background-color: $mask-background;
     z-index: 10;
-    display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
@@ -21,23 +20,22 @@
 }
 
 .zoomImage {
-    .imageBox {
-        position: relative;
-        max-width: min(96rem, 95vw);
-        height: min(64rem, 80vh);
-        overflow: hidden;
-        border-radius: 1rem;
+    display: flex;
 
-        img {
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain;
-            object-position: center;
-        }
+    img {
+        display: block;
+        width: fit-content;
+        max-width: min(96rem, 95vw);
+        max-height: min(64rem, 80vh);
+        object-fit: contain;
+        object-position: center;
+        border-radius: 1rem;
     }
 }
 
 .deleteDialog {
+    display: flex;
+
     .box {
         position: relative;
         width: min(18rem, 95vw);
