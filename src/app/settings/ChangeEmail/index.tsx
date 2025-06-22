@@ -344,6 +344,5 @@ export default function ChangeEmail(props: propsType): ReactNode {
         <div className={styles.errorMessage} data-open={showErrorMessage}>
             <div>{realErrorMessage}</div>
         </div >
-        <div>123</div>
     </>
 }

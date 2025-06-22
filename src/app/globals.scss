@@ -1,5 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+// @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@import "@/fonts/MaterialSymbolsOutlined.css";
+@import "@/fonts/MaterialSymbolsOutlined_FILL.css";
+@import "@/fonts/MaterialSymbolsRounded.css";
 
 :root {
   // font-size: min(1rem, 3vw);
@@ -90,7 +92,7 @@ h2 {
 .ms-p::after,
 .ms-bp::before,
 .ms-ap::after {
-  font-family: "Material Symbols Outlined";
+  font-family: "Material Symbols Outlined Fill";
   user-select: none;
   font-variation-settings:
     "FILL" 1,
@@ -104,7 +106,7 @@ h2 {
 .ms-nf-p::after,
 .ms-nf-bp::before,
 .ms-nf-ap::after {
-  font-family: "Material Symbols Outlined";
+  font-family: "Material Symbols Outlined Not Fill";
   user-select: none;
   font-variation-settings:
     "FILL" 0,

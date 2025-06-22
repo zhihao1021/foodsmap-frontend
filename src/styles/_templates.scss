@@ -1,3 +1,5 @@
+@use "@/styles/colors" as *;
+
 @mixin box-shadow($unit: 0.1rem) {
     box-shadow: $unit $unit (
         2 * $unit) (-1 * $unit) #000;
@@ -35,6 +37,59 @@
         content: "";
         position: absolute;
         @content;
+    }
+}
+
+@mixin fill-switch-icon($content: "") {
+
+    &:has(input:checked)::before,
+    &:has(input:not(:checked))::after {
+        transform: scale(0);
+    }
+
+    &:has(input:not(:checked))::before,
+    &:has(input:checked)::after {
+        transform: scale(1);
+    }
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        content: $content;
+        text-align: center;
+
+        user-select: none;
+        transition: transform 0.3s;
+        cursor: pointer;
+
+        @content;
+    }
+
+    &::before {
+        font-family: "Material Symbols Outlined Not Fill";
+        font-variation-settings:
+            "FILL" 0,
+            "wght" 400,
+            "GRAD" 0,
+            "opsz" 48;
+    }
+
+    &::after {
+        background: linear-gradient(135deg,
+                $secondary 20%,
+                $accent 70%);
+        color: transparent;
+        background-clip: text;
+        font-family: "Material Symbols Outlined Fill";
+        font-variation-settings:
+            "FILL" 1,
+            "wght" 400,
+            "GRAD" 0,
+            "opsz" 48;
     }
 }
 
