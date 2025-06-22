@@ -18,7 +18,7 @@ export default function AuthorCard({ user }: Props) {
         />
         <span className={styles.authorName}>{user.displayName}</span>
       </div>
-      <hr className={styles.bottomDivider} />
+      <hr className={styles.hr} />
     </div>
   );
 }

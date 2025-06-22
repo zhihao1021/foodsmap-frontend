@@ -10,15 +10,16 @@
 .suggestionButton {
   padding: 0.5rem 1rem;
   border-radius: 999px;
-  border: 1px solid #aaa;
-  background: #e0f2ff;
-  color: #004a75;
+  border: 1px solid $scrollbar-background;
+  background: $primary;
+  color: $background;
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
   white-space: nowrap;
 
   &:hover {
-    background-color: #c7e5ff;
+    background-color: $secondary;
+    border: 1px solid $secondary;
   }
 }
