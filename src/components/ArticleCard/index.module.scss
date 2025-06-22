@@ -182,6 +182,7 @@
 
         .contextBox {
             min-height: 2.5rem;
+            white-space: pre-wrap;
 
             .tag {
                 color: $accent;
