@@ -134,10 +134,10 @@ export default function LoginForm(): ReactNode {
     useEffect(() => {
         setTimeout(() => {
             blockRef.current?.scrollTo({ left: 0, behavior: "instant" });
-        }, 500);
+        }, 300);
     }, [section]);
 
-    return <div ref={blockRef} className={styles.formBlock}>
+    return <div ref={blockRef} className={styles.formBlock} onScroll={() => blockRef.current?.scrollTo({ left: 0, behavior: "instant" })}>
         <LoadingStrip
             className={styles.loading}
             show={rawSection === SectionState.LOADING ? 0 : lastSection === rawSection ? 1 : -1}
