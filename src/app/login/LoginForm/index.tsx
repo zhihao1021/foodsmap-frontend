@@ -132,7 +132,9 @@ export default function LoginForm(): ReactNode {
     }, [loginMethods]);
 
     useEffect(() => {
-        blockRef.current?.scrollTo({ left: 0, behavior: "instant" });
+        setTimeout(() => {
+            blockRef.current?.scrollTo({ left: 0, behavior: "instant" });
+        }, 500);
     }, [section]);
 
     return <div ref={blockRef} className={styles.formBlock}>

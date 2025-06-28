@@ -2,9 +2,6 @@
     position: relative;
     height: 14rem;
     overflow-x: hidden;
-    overflow-anchor: none;
-    overscroll-behavior: unset;
-    scroll-behavior: unset;
     --input-bottom-bar: #{$box-context};
 
     .loading {
