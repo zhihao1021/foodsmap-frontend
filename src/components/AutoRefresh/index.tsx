@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { JWTPayload } from "@/schemas/jwt";
 
 import refreshToken from "@/api/auth/refreshToken";
+import { AxiosError } from "axios";
 
 export default function AutoRefresh(): ReactNode {
     useEffect(() => {
@@ -38,10 +39,19 @@ export default function AutoRefresh(): ReactNode {
                         secure: true,
                         sameSite: "Strict",
                     });
+                }).catch((error: AxiosError) => {
+                    const statusCode = error.response?.status;
+
+                    if (statusCode && statusCode < 500) {
+                        console.log(statusCode);
+                        localStorage.removeItem("access_token");
+                        localStorage.removeItem("token_type");
+                        Cookies.remove("access_token");
+                    }
                 });
             }
             catch { }
-        };
+        }
 
         refresh();
         setInterval(() => refresh(), 60 * 1000 * 1000); // 1 hour

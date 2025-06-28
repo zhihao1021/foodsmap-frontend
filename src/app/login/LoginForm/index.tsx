@@ -6,6 +6,7 @@ import {
     useCallback,
     useEffect,
     useMemo,
+    useRef,
     useState
 } from "react";
 
@@ -31,6 +32,8 @@ import EmailValidateSection from "./sections/register/EmailValidateSection";
 import styles from "./index.module.scss";
 
 export default function LoginForm(): ReactNode {
+    const blockRef = useRef<HTMLDivElement>(null);
+
     const [lastSection, setLastSection] = useState<SectionState>(SectionState.LOGIN);
     const [rawSection, setSectionRaw] = useState<SectionState>(SectionState.LOGIN);
     const [loginMethods, setLoginMethods] = useState<Array<LoginMethod>>([LoginMethod.PASSWORD]);
@@ -128,7 +131,11 @@ export default function LoginForm(): ReactNode {
         setSelectedMethod(loginMethods[0]);
     }, [loginMethods]);
 
-    return <div className={styles.formBlock}>
+    useEffect(() => {
+        blockRef.current?.scrollTo({ left: 0, behavior: "instant" });
+    }, [section]);
+
+    return <div ref={blockRef} className={styles.formBlock}>
         <LoadingStrip
             className={styles.loading}
             show={rawSection === SectionState.LOADING ? 0 : lastSection === rawSection ? 1 : -1}
